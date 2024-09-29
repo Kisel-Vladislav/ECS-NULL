@@ -32,7 +32,7 @@ namespace CodeBase.Infrastructure.States
         }
         private void InitGameWorld()
         {
-            _playerFactory.Create(_levelService.WordObjectCollector.SpawnPoint.position,Quaternion.identity);
+            //_playerFactory.Create(_levelService.WordObjectCollector.SpawnPoint.position,Quaternion.identity);
         }
         public void Exit()
         {
