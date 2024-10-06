@@ -6,7 +6,6 @@ namespace CodeBase.ECS.PlayerComponent
     public struct PlayerC
     {
         public Animator playerAnimator;
-        public Transform playerTransform;
         public CharacterController CharacterController;
         public float playerSpeed;
     }

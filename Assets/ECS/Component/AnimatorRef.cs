@@ -6,6 +6,10 @@ namespace CodeBase.ECS.Component
     {
         public Animator animator;
     }
+    public struct TransformRef
+    {
+        public Transform transform;
+    }
     public struct Health
     {
         public int value;

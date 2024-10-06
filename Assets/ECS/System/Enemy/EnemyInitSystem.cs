@@ -18,10 +18,10 @@ namespace CodeBase.ECS.System.Enemy
             foreach (var i in calmEnemies)
             {
                 ref var enemy = ref calmEnemies.Get1(i);
-                ref var player = ref runtimeData.playerEntity.Get<PlayerC>();
+                ref var playerTransform = ref runtimeData.playerEntity.Get<TransformRef>();
                 ref var animatorRef = ref calmEnemies.Get2(i);
 
-                if ((enemy.transform.position - player.playerTransform.position).sqrMagnitude <= enemy.triggerDistance * enemy.triggerDistance)
+                if ((enemy.transform.position - playerTransform.transform.position).sqrMagnitude <= enemy.triggerDistance * enemy.triggerDistance)
                 {
                     ref var entity = ref calmEnemies.GetEntity(i);
                     entity.Del<Idle>();

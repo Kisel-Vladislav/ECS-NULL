@@ -37,8 +37,12 @@ namespace CodeBase.ECS.PlayerSystem
             ref var player = ref playerEntity.Get<PlayerC>();
             ref var inputData = ref playerEntity.Get<PlayerInputData>();
 
+            ref var transformRef = ref playerEntity.Get<TransformRef>();
+
             var playerGameObject = Object.Instantiate(configuration.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
-            player.playerTransform = playerGameObject.transform;
+
+            transformRef.transform = playerGameObject.GetComponent<Transform>();
+
             player.playerSpeed = configuration.PlayerSpeed;
             player.CharacterController = playerGameObject.GetComponent<CharacterController>();
             player.playerAnimator = playerGameObject.GetComponent<Animator>();
@@ -62,7 +66,7 @@ namespace CodeBase.ECS.PlayerSystem
             var weaponEntity = _world.NewEntity();
             hasWeapon.weapon = weaponEntity;
 
-            var playerGameObject = runtimeData.playerEntity.Get<PlayerC>().playerTransform.gameObject;
+            var playerGameObject = runtimeData.playerEntity.Get<TransformRef>().transform.gameObject;
             var weaponGameObject = Object.Instantiate(WeaponSettings.WeaponPrefab, playerGameObject.GetComponent<WeaponParent>().Pistol);
             var weaponView = weaponGameObject.GetComponent<WeaponView>();
 
