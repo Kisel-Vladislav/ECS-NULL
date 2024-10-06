@@ -1,11 +1,12 @@
-﻿using CodeBase.ECS.PlayerComponent;
+﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
 namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerMoveSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerComponent.PlayerC, PlayerInputData> _filter;
+        private EcsFilter<PlayerMove, MoveInput> _filter;
 
         public void Run()
         {
@@ -14,9 +15,8 @@ namespace CodeBase.ECS.PlayerSystem
                 ref var player = ref _filter.Get1(i);
                 ref var input = ref _filter.Get2(i);
 
-                Vector3 direction = (Vector3.forward * input.moveInput.z + Vector3.right * input.moveInput.x).normalized;
+                Vector3 direction = (Vector3.forward * input.vector.z + Vector3.right * input.vector.x).normalized;
                 player.CharacterController.Move(direction * player.playerSpeed * Time.deltaTime);
-                
             }
         }
     }

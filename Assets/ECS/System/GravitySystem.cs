@@ -1,11 +1,12 @@
-﻿using CodeBase.ECS.PlayerComponent;
+﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
 namespace CodeBase.ECS.System
 {
     public class GravitySystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerComponent.PlayerC> _filter;
+        private EcsFilter<PlayerMove> _filter;
         public void Run()
         {
             foreach (var i in _filter)

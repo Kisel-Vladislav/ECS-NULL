@@ -34,8 +34,8 @@ namespace CodeBase.ECS.PlayerSystem
 
         private void InitializePlayerComponents(EcsEntity playerEntity)
         {
-            ref var player = ref playerEntity.Get<PlayerC>();
-            ref var inputData = ref playerEntity.Get<PlayerInputData>();
+            ref var player = ref playerEntity.Get<PlayerMove>();
+            //ref var inputData = ref playerEntity.Get<PlayerInputData>();
 
             ref var transformRef = ref playerEntity.Get<TransformRef>();
 

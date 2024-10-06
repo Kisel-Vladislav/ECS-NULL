@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CodeBase.ECS.PlayerComponent
 {
     [Serializable]
-    public struct PlayerC
+    public struct PlayerMove
     {
         public CharacterController CharacterController;
         public float playerSpeed;

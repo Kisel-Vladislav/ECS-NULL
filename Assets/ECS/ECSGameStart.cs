@@ -1,3 +1,4 @@
+using CodeBase.ECS.Component;
 using CodeBase.ECS.Data;
 using CodeBase.ECS.PlayerSystem;
 using CodeBase.ECS.System;
@@ -68,9 +69,11 @@ namespace CodeBase.ECS
             _systems.Add(new PlayerInitSystem())
                 .Add(new EnemyInitSystem())
                 .OneFrame<TryReload>()
+                .OneFrame<TryAim>()
                 .Add(new PlayerInputSystem())
                 .Add(new GravitySystem())
                 .Add(new PlayerMoveSystem())
+                .Add(new AimSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new WeaponBlockSystem())

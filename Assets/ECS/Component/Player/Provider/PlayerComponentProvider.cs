@@ -2,7 +2,7 @@
 
 namespace CodeBase.ECS.PlayerComponent.Provider
 {
-    public class PlayerComponentProvider : MonoProvider<PlayerC>
+    public class PlayerComponentProvider : MonoProvider<PlayerMove>
     {
     }
 }

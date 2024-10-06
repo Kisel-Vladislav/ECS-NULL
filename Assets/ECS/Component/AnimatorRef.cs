@@ -17,4 +17,11 @@ namespace CodeBase.ECS.Component
     public struct Idle : IEcsIgnoreInFilter
     {
     }
+    public struct MoveInput
+    {
+        public Vector3 vector;
+    }
+    public struct TryAim : IEcsIgnoreInFilter { }
+    public struct Aiming : IEcsIgnoreInFilter { }
+    public struct AimFinished : IEcsIgnoreInFilter { }
 }   
