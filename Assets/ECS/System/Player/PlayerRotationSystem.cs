@@ -7,7 +7,7 @@ namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerRotationSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerC,TransformRef> _filter;
+        private EcsFilter<PlayerComponent.PlayerC,TransformRef> _filter;
         private SceneData _sceneData;
 
         public void Run()

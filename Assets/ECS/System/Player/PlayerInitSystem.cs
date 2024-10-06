@@ -45,7 +45,6 @@ namespace CodeBase.ECS.PlayerSystem
 
             player.playerSpeed = configuration.PlayerSpeed;
             player.CharacterController = playerGameObject.GetComponent<CharacterController>();
-            player.playerAnimator = playerGameObject.GetComponent<Animator>();
 
             InitializePlayerAnimator(playerEntity, playerGameObject);
         }
@@ -56,8 +55,7 @@ namespace CodeBase.ECS.PlayerSystem
             playerAnimatorStateReader.entity = playerEntity;
 
             ref var animatorRef = ref playerEntity.Get<AnimatorRef>();
-            ref var player = ref playerEntity.Get<PlayerC>();
-            animatorRef.animator = player.playerAnimator;
+            animatorRef.animator = playerGameObject.GetComponent<Animator>();
         }
 
         private void SetupWeapon(EcsEntity playerEntity)

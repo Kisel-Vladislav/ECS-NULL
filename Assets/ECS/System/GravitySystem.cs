@@ -5,7 +5,7 @@ namespace CodeBase.ECS.System
 {
     public class GravitySystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerC> _filter;
+        private EcsFilter<PlayerComponent.PlayerC> _filter;
         public void Run()
         {
             foreach (var i in _filter)

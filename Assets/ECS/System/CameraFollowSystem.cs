@@ -8,7 +8,7 @@ namespace CodeBase.ECS.System
 {
     public class CameraFollowSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerC, TransformRef> _filter;
+        private EcsFilter<PlayerComponent.PlayerC, TransformRef> _filter;
         private SceneData _sceneData;
         private StaticData _staticData;
 

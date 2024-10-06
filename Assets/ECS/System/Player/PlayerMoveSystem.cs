@@ -5,7 +5,7 @@ namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerMoveSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerC, PlayerInputData> _filter;
+        private EcsFilter<PlayerComponent.PlayerC, PlayerInputData> _filter;
 
         public void Run()
         {

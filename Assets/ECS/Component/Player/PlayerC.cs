@@ -5,7 +5,6 @@ namespace CodeBase.ECS.PlayerComponent
     [Serializable]
     public struct PlayerC
     {
-        public Animator playerAnimator;
         public CharacterController CharacterController;
         public float playerSpeed;
     }
