@@ -1,34 +1,70 @@
 ﻿using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Enemy;
-using CodeBase.ECS.Data;
-using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CodeBase.ECS.System.Enemy
 {
-    public class EnemyIdleSystem : IEcsRunSystem
+    public class EnemyAggroSystem : IEcsRunSystem
     {
-        private EcsFilter<EnemyComponent, AnimatorRef, Idle> calmEnemies;
-        private RuntimeData runtimeData;
+        private EcsFilter <EnterAggro> _enterFilter;
+        private EcsFilter<ExitAggro> _exitFilter;
+        public void Run()
+        {
+            foreach (var i in _enterFilter)
+            {
+                ref var entity = ref _enterFilter.GetEntity(i);
+                ref var target = ref _enterFilter.Get1(i);
+
+                ref var follow = ref entity.Get<Follow>();
+                follow.target = target.target;
+            }
+            foreach (var i in _exitFilter)
+            {
+                ref var entity = ref _exitFilter.GetEntity(i);
+                ref var timer = ref entity.Get<AggroTimer>();
+                timer.Cooldown = 3f; //TO DO to static data or constant
+            }
+        }
+    }
+    public class AggroTimerSystem : IEcsRunSystem
+    {
+        private EcsFilter<AggroTimer> _filter;
+        public void Run()
+        {
+            foreach (var i in _filter)
+            {
+                ref var timer = ref _filter.Get1(i);
+                timer.Cooldown -= Time.deltaTime;
+
+                if(timer.Cooldown <= 0)
+                {
+                    ref var entity = ref _filter.GetEntity(i);
+                    entity.Del<AggroTimer>();
+                }
+            }
+        }
+    }
+    public class EnemyFollowSystem : IEcsRunSystem
+    {
+        private EcsFilter<EnemyComponent, Follow, AnimatorRef> followingEnemies;
+        private EcsWorld ecsWorld;
 
         public void Run()
         {
-            foreach (var i in calmEnemies)
+            foreach (var i in followingEnemies)
             {
-                ref var enemy = ref calmEnemies.Get1(i);
-                ref var playerTransform = ref runtimeData.playerEntity.Get<TransformRef>();
-                ref var animatorRef = ref calmEnemies.Get2(i);
+                ref var enemy = ref followingEnemies.Get1(i);
+                ref var follow = ref followingEnemies.Get2(i);
+                ref var animatorRef = ref followingEnemies.Get3(i);
 
-                if ((enemy.transform.position - playerTransform.transform.position).sqrMagnitude <= enemy.triggerDistance * enemy.triggerDistance)
-                {
-                    ref var entity = ref calmEnemies.GetEntity(i);
-                    entity.Del<Idle>();
-                    ref var follow = ref entity.Get<Follow>();
-                    follow.target = runtimeData.playerEntity;
-                    animatorRef.animator.SetBool("Running", true);
-                }
+                var targetPos = follow.target.position;
+                enemy.navMeshAgent.SetDestination(targetPos);
+                //var direction = (targetPos - enemy.transform.position).normalized;
+                //direction.y = 0f;
+
+                //if(direction != Vector3.zero)
+                //    enemy.transform.forward = direction;
             }
         }
     }
@@ -41,6 +77,9 @@ namespace CodeBase.ECS.System.Enemy
             foreach (var enemyView in Object.FindObjectsOfType<EnemyView>())
             {
                 var enemyEntity = ecsWorld.NewEntity();
+
+                var aggro = enemyView.GetComponentInChildren<Aggro>();
+                aggro.entity = enemyEntity;
 
                 ref var enemy = ref enemyEntity.Get<EnemyComponent>();
                 ref var health = ref enemyEntity.Get<Health>();

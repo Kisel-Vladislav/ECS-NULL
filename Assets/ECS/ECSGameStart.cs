@@ -83,6 +83,9 @@ namespace CodeBase.ECS
                 .Add(new ProjectileHitSystem())
                 .Add(new ProjectileMoveSystem())
                 .Add(new PlayerAnimationSystem())
+                .Add(new EnemyFollowSystem())
+                .Add(new AggroTimerSystem())
+                .Add(new EnemyAggroSystem())
                 ;
         }
 

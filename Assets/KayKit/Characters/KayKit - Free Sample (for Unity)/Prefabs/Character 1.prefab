@@ -126,6 +126,72 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.52615726, y: 1.0974663, z: 0.0005566329}
     m_Extent: {x: 0.44509628, y: 0.112917304, z: 0.12667072}
   m_DirtyAABB: 0
+--- !u!1 &432187240833031592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3521849876417218126}
+  - component: {fileID: 7508564310273928267}
+  - component: {fileID: 3370240977099830549}
+  m_Layer: 6
+  m_Name: AggroZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3521849876417218126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432187240833031592}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 285080776201864086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7508564310273928267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432187240833031592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b87fda802a2bd4fa00003b49a9d74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &3370240977099830549
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432187240833031592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &524546916814320253
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +241,7 @@ GameObject:
   - component: {fileID: 5575949449335890730}
   - component: {fileID: 4754509141256580421}
   - component: {fileID: 4151223992265099509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,6 +268,7 @@ Transform:
   - {fileID: 1152902025632653676}
   - {fileID: 6298932414799631202}
   - {fileID: 9219835428051776250}
+  - {fileID: 3521849876417218126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &330859411138041217
