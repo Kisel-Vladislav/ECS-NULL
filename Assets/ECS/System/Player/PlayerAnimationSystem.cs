@@ -1,11 +1,12 @@
-﻿using CodeBase.ECS.Component;
+﻿using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
-namespace CodeBase.ECS.System
+
+namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerAnimationSystem : IEcsRunSystem
     {
-        private EcsFilter<Component.Player, PlayerInputData> filter;
+        private EcsFilter<PlayerC, PlayerInputData> filter;
 
         public void Run()
         {

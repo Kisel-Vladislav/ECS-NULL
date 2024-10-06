@@ -1,14 +1,7 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
-namespace CodeBase.ECS.Component
+namespace CodeBase.ECS.WeaponComponent
 {
-    public struct Player
-    {
-        public Animator playerAnimator;
-        public Transform playerTransform;
-        public CharacterController CharacterController;
-        public float playerSpeed;
-    }
     public struct Weapon
     {
         public EcsEntity owner;
@@ -20,9 +13,6 @@ namespace CodeBase.ECS.Component
         public int currentInMagazine;
         public int maxInMagazine;
         public int totalAmmo;
+        public float Cooldown;
     }
-    public struct HasWeapon
-    {
-        public EcsEntity weapon;
-    }
-}
+}   

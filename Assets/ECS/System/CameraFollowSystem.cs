@@ -1,11 +1,13 @@
 ﻿using CodeBase.ECS.Data;
+using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
+
 namespace CodeBase.ECS.System
 {
     public class CameraFollowSystem : IEcsRunSystem
     {
-        private EcsFilter<Component.Player> _filter;
+        private EcsFilter<PlayerC> _filter;
         private SceneData _sceneData;
         private StaticData _staticData;
 

@@ -28,6 +28,12 @@ namespace CodeBase.Infrastructure.Factory
             lobby.Construct(_gameStateMachine);
             _uiRoot.AddWindow(lobby.transform);
         }
+        public Hud CreateHud()
+        {
+            var hud = _assetProvider.Instance<Hud>(AssetsPath.Hud);
+            _uiRoot.AddWindow(hud.transform);
+            return hud;
+        }
 
         public void Clear()
         {

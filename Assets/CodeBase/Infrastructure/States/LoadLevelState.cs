@@ -9,14 +9,16 @@ namespace CodeBase.Infrastructure.States
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly IUIFactory _uiFactory;
         private IPlayerFactory _playerFactory;
         private ILevelService _levelService;
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelService levelService, IPlayerFactory playerFactory)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelService levelService, IPlayerFactory playerFactory, IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _levelService = levelService;
             _playerFactory = playerFactory;
+            _uiFactory = uiFactory;
         }
 
         public void Enter()
@@ -27,7 +29,7 @@ namespace CodeBase.Infrastructure.States
         private void OnLoaded()
         {
             InitGameWorld();
-
+            //_uiFactory.CreateHud();
             _stateMachine.Enter<GameLoopState>();
         }
         private void InitGameWorld()

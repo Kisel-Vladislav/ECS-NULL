@@ -14,5 +14,6 @@ namespace CodeBase.ECS.Data
         public int CurrentInMagazine;
         public int MaxInMagazine;
         public int TotalAmmo;
+        public float Cooldown;
     }
 }

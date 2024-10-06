@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea4dc4e39e088f4ba7ed3fc384363ec, type: 3}
   m_Name: StaticData
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 564008150529913243, guid: 662b64018d8fb804b83ade0500639ff9,
+  PlayerPrefab: {fileID: 564008150529913243, guid: c53cd6d6aa372c6418ddecd6ead5cd58,
     type: 3}
   PlayerSpeed: 2
   SmoothTime: 0.5
-  FollowOffset: {x: 0, y: 5, z: -3}
+  FollowOffset: {x: 0, y: 15, z: -13}

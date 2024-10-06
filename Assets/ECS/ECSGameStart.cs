@@ -1,12 +1,15 @@
 using CodeBase.ECS.Data;
+using CodeBase.ECS.PlayerSystem;
 using CodeBase.ECS.System;
+using CodeBase.ECS.System.Enemy;
+using CodeBase.ECS.WeaponComponent;
+using CodeBase.ECS.WeaponSystem;
+using CodeBase.Infrastructure.Factory;
+using CodeBase.UI;
 using Leopotam.Ecs;
 using UnityEngine;
 using Voody.UniLeo;
-
-namespace CodeBase.ECS.Data
-{
-}
+using Zenject;
 
 namespace CodeBase.ECS
 {
@@ -20,11 +23,26 @@ namespace CodeBase.ECS
 
         private EcsWorld _world;
         private EcsSystems _systems;
+        private Hud _hud;
 
+        [Inject]
+        public void Construct(IUIFactory uIFactory)
+        {
+            _hud = uIFactory.CreateHud();
+        }
         private void Start()
         {
+            
             _world = new EcsWorld();
+#if UNITY_EDITOR
+            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
+#endif
+
             _systems = new EcsSystems(_world);
+
+#if UNITY_EDITOR
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
+#endif
 
             _systems.ConvertScene();
             _runtimeData = new RuntimeData();
@@ -41,17 +59,26 @@ namespace CodeBase.ECS
                     .Inject(SceneData)
                     .Inject(_runtimeData)
                     .Inject(WeaponSettings)
+                    .Inject(_hud);
                     ;
         }
 
         private void AddSystems()
         {
             _systems.Add(new PlayerInitSystem())
+                .Add(new EnemyInitSystem())
+                .OneFrame<TryReload>()
                 .Add(new PlayerInputSystem())
                 .Add(new GravitySystem())
                 .Add(new PlayerMoveSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
+                .Add(new WeaponBlockSystem())
+                .Add(new WeaponShootSystem())
+                .Add(new ReloadingSystem())
+                .Add(new SpawnProjectileSystem())
+                .Add(new ProjectileHitSystem())
+                .Add(new ProjectileMoveSystem())
                 .Add(new PlayerAnimationSystem())
                 ;
         }
@@ -69,10 +96,4 @@ namespace CodeBase.ECS
             _systems = null;
         }
     }
-}
-namespace CodeBase.ECS.System
-{
-}
-namespace CodeBase.ECS.Component
-{
 }

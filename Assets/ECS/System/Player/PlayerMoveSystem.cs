@@ -1,15 +1,11 @@
-﻿using CodeBase.ECS.Component;
+﻿using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
-namespace CodeBase.ECS.System
+namespace CodeBase.ECS.PlayerSystem
 {
-    public class AimSystem
-    {
-
-    }
     public class PlayerMoveSystem : IEcsRunSystem
     {
-        private EcsFilter<Component.Player, PlayerInputData> _filter;
+        private EcsFilter<PlayerC, PlayerInputData> _filter;
 
         public void Run()
         {

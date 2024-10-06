@@ -1,11 +1,12 @@
 ﻿using CodeBase.ECS.Data;
+using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
-namespace CodeBase.ECS.System
+namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerRotationSystem : IEcsRunSystem
     {
-        private EcsFilter<Component.Player> _filter;
+        private EcsFilter<PlayerC> _filter;
         private SceneData _sceneData;
 
         public void Run()
