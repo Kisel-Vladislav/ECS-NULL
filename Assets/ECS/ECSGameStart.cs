@@ -73,6 +73,9 @@ namespace CodeBase.ECS
                 .Add(new PlayerInputSystem())
                 .Add(new GravitySystem())
                 .Add(new PlayerMoveSystem())
+                .Add(new EnemyAggroSystem())
+                .Add(new AgentInputSystem())
+                .Add(new AgentAttackSystem())
                 .Add(new AimSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
@@ -85,8 +88,6 @@ namespace CodeBase.ECS
                 .Add(new AnimationSystem())
                 .Add(new EnemyFollowSystem())
                 .Add(new AggroTimerSystem())
-                .Add(new EnemyAggroSystem())
-                .Add(new AgentInputSystem())
                 ;
         }
 

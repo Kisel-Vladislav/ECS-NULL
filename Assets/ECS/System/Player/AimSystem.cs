@@ -1,5 +1,6 @@
 ﻿using CodeBase.ECS.Component;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace CodeBase.ECS.System
 {
@@ -12,6 +13,7 @@ namespace CodeBase.ECS.System
             foreach (var i in _tryAimFilter)
             {
                 ref var animator = ref _tryAimFilter.Get2(i);
+                Debug.Log("Try");
                 animator.animator.SetBool("IsAiming", true);
             }
             foreach (var i in _finishedAimFilter)

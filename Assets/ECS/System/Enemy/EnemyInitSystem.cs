@@ -1,7 +1,11 @@
 ﻿using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Data;
+using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
+using System.Text;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace CodeBase.ECS.System.Enemy
 {
@@ -83,15 +87,43 @@ namespace CodeBase.ECS.System.Enemy
             }
         }
     }
+    public class AgentAttackSystem : IEcsRunSystem
+    {
+        private EcsFilter<EnemyComponent,Follow,TransformRef,HasWeapon> _filter;
+
+        public void Run()
+        {
+            foreach (var i in _filter)
+            {
+                ref var entity = ref _filter.GetEntity(i);
+                ref var follow = ref _filter.Get2(i);
+                ref var transform = ref _filter.Get3(i);
+                ref var hasWeapon = ref _filter.Get4(i);
+
+                var ray = new Ray(transform.transform.position, follow.target.position.normalized);
+                if (Physics.Raycast(ray, 100))
+                {
+                    entity.Get<TryAim>();
+                    hasWeapon.weapon.Get<Shoot>();
+                }
+                else
+                {
+                    entity.Get<AimFinished>();
+                }
+
+            }
+        }
+    }
+
     public class EnemyInitSystem : IEcsInitSystem
     {
-        private EcsWorld ecsWorld;
-
+        private EcsWorld _world;
+        private WeaponSettings _weaponSettings;
         public void Init()
         {
             foreach (var enemyView in Object.FindObjectsOfType<EnemyView>())
             {
-                var enemyEntity = ecsWorld.NewEntity();
+                var enemyEntity = _world.NewEntity();
 
                 var aggro = enemyView.GetComponentInChildren<Aggro>();
                 aggro.entity = enemyEntity;
@@ -114,6 +146,26 @@ namespace CodeBase.ECS.System.Enemy
                 enemy.meleeAttackInterval = enemyView.meleeAttackInterval;
                 enemy.triggerDistance = enemyView.triggerDistance;
                 animatorRef.animator = enemyView.animator;
+
+                ref var hasWeapon = ref enemyEntity.Get<HasWeapon>();
+                var weaponEntity = _world.NewEntity();
+                hasWeapon.weapon = weaponEntity;
+
+                var enemyGameObject = enemyView.gameObject;
+                var weaponGameObject = Object.Instantiate(_weaponSettings.WeaponPrefab, enemyGameObject.GetComponent<WeaponParent>().Pistol);
+                var weaponView = weaponGameObject.GetComponent<WeaponView>();
+
+                ref var weapon = ref weaponEntity.Get<Weapon>();
+                weapon.owner = enemyEntity;
+                weapon.projectilePrefab = _weaponSettings.ProjectilePrefab;
+                weapon.projectileRadius = _weaponSettings.ProjectileRadius;
+                weapon.projectileSocket = weaponView.ProjectileSocket;
+                weapon.projectileSpeed = _weaponSettings.ProjectileSpeed;
+                weapon.totalAmmo = _weaponSettings.TotalAmmo;
+                weapon.weaponDamage = _weaponSettings.WeaponDamage;
+                weapon.currentInMagazine = _weaponSettings.CurrentInMagazine;
+                weapon.maxInMagazine = _weaponSettings.MaxInMagazine;
+                weapon.Cooldown = _weaponSettings.Cooldown;
             }
         }
     }

@@ -7,7 +7,7 @@ namespace CodeBase.ECS.PlayerSystem
 {
     public class PlayerInputSystem : IEcsRunSystem
     {
-        private EcsFilter<HasWeapon> _filter;
+        private EcsFilter<HasWeapon,PlayerMove> _filter;
 
         public void Run()
         {
