@@ -82,10 +82,11 @@ namespace CodeBase.ECS
                 .Add(new SpawnProjectileSystem())
                 .Add(new ProjectileHitSystem())
                 .Add(new ProjectileMoveSystem())
-                .Add(new PlayerAnimationSystem())
+                .Add(new AnimationSystem())
                 .Add(new EnemyFollowSystem())
                 .Add(new AggroTimerSystem())
                 .Add(new EnemyAggroSystem())
+                .Add(new AgentInputSystem())
                 ;
         }
 

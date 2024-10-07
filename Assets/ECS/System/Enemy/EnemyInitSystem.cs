@@ -68,6 +68,21 @@ namespace CodeBase.ECS.System.Enemy
             }
         }
     }
+    public class AgentInputSystem : IEcsRunSystem
+    {
+        private EcsFilter<EnemyComponent> _filter;
+        public void Run()
+        {
+            foreach(var i in _filter)
+            {
+                ref var entity = ref _filter.GetEntity(i);
+                ref var agent = ref _filter.Get1(i);
+
+                ref var input = ref entity.Get<MoveInput>();
+                input.vector = agent.navMeshAgent.desiredVelocity;
+            }
+        }
+    }
     public class EnemyInitSystem : IEcsInitSystem
     {
         private EcsWorld ecsWorld;
@@ -84,7 +99,7 @@ namespace CodeBase.ECS.System.Enemy
                 ref var enemy = ref enemyEntity.Get<EnemyComponent>();
                 ref var health = ref enemyEntity.Get<Health>();
                 ref var animatorRef = ref enemyEntity.Get<AnimatorRef>();
-
+                ref var transformRef = ref enemyEntity.Get<TransformRef>();
                 enemyEntity.Get<Idle>();
                 enemyView.entity = enemyEntity;
 
@@ -92,7 +107,10 @@ namespace CodeBase.ECS.System.Enemy
                 enemy.damage = enemyView.damage;
                 enemy.meleeAttackDistance = enemyView.meleeAttackDistance;
                 enemy.navMeshAgent = enemyView.navMeshAgent;
+
                 enemy.transform = enemyView.transform;
+                transformRef.transform = enemyView.transform;
+
                 enemy.meleeAttackInterval = enemyView.meleeAttackInterval;
                 enemy.triggerDistance = enemyView.triggerDistance;
                 animatorRef.animator = enemyView.animator;

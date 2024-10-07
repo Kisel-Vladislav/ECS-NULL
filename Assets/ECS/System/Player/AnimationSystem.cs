@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace CodeBase.ECS.PlayerSystem
 {
-    public class PlayerAnimationSystem : IEcsRunSystem
+    public class AnimationSystem : IEcsRunSystem
     {
-        private EcsFilter<PlayerMove,MoveInput,TransformRef,AnimatorRef> filter;
+        private EcsFilter<MoveInput,TransformRef,AnimatorRef> filter;
 
         public void Run()
         {
             foreach (var i in filter)
             {
-                ref var animator = ref filter.Get4(i);
-                ref var input = ref filter.Get2(i);
-                ref var transform = ref filter.Get3(i); 
+                ref var animator = ref filter.Get3(i);
+                ref var input = ref filter.Get1(i);
+                ref var transform = ref filter.Get2(i); 
 
                 float vertical = Vector3.Dot(input.vector.normalized, transform.transform.forward);
                 float horizontal = Vector3.Dot(input.vector.normalized, transform.transform.right);
