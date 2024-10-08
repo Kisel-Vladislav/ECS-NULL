@@ -24,4 +24,8 @@ namespace CodeBase.ECS.Component
     public struct TryAim : IEcsIgnoreInFilter { }
     public struct Aiming : IEcsIgnoreInFilter { }
     public struct AimFinished : IEcsIgnoreInFilter { }
-}   
+    public struct LookAt
+    {
+        public Transform transform;
+    }
+}

@@ -77,6 +77,7 @@ namespace CodeBase.ECS
                 .Add(new AgentInputSystem())
                 .Add(new AgentAttackSystem())
                 .Add(new AimSystem())
+                .Add(new LookAtSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new WeaponBlockSystem())
