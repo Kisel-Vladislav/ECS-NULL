@@ -1,6 +1,5 @@
 ﻿using CodeBase.ECS.Component;
 using Leopotam.Ecs;
-using UnityEngine;
 
 namespace CodeBase.ECS.System
 {

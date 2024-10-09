@@ -14,9 +14,6 @@ namespace CodeBase.ECS.Component
     {
         public int value;
     }
-    public struct Idle : IEcsIgnoreInFilter
-    {
-    }
     public struct MoveInput
     {
         public Vector3 vector;
