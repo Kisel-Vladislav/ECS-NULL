@@ -1,0 +1,24 @@
+﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.Component.Enemy;
+using Leopotam.Ecs;
+
+namespace CodeBase.ECS.System.Agent
+{
+    public class AgentFollowSystem : IEcsRunSystem
+    {
+        private EcsFilter<EnemyComponent, Follow, AnimatorRef> followingEnemies;
+
+        public void Run()
+        {
+            foreach (var i in followingEnemies)
+            {
+                ref var enemy = ref followingEnemies.Get1(i);
+                ref var follow = ref followingEnemies.Get2(i);
+
+                var targetPos = follow.target.position;
+
+                enemy.navMeshAgent.SetDestination(targetPos);
+            }
+        }
+    }
+}

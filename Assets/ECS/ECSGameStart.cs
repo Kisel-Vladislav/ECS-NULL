@@ -2,7 +2,7 @@ using CodeBase.ECS.Component;
 using CodeBase.ECS.Data;
 using CodeBase.ECS.PlayerSystem;
 using CodeBase.ECS.System;
-using CodeBase.ECS.System.Enemy;
+using CodeBase.ECS.System.Agent;
 using CodeBase.ECS.WeaponComponent;
 using CodeBase.ECS.WeaponSystem;
 using CodeBase.Infrastructure.Factory;
@@ -67,13 +67,13 @@ namespace CodeBase.ECS
         private void AddSystems()
         {
             _systems.Add(new PlayerInitSystem())
-                .Add(new EnemyInitSystem())
+                .Add(new AgentInitSystem())
                 .OneFrame<TryReload>()
                 .OneFrame<TryAim>()
                 .Add(new PlayerInputSystem())
                 .Add(new GravitySystem())
                 .Add(new PlayerMoveSystem())
-                .Add(new EnemyAggroSystem())
+                .Add(new AgentAggroSystem())
                 .Add(new AgentInputSystem())
                 .Add(new AgentAttackSystem())
                 .Add(new AimSystem())
@@ -87,7 +87,7 @@ namespace CodeBase.ECS
                 .Add(new ProjectileHitSystem())
                 .Add(new ProjectileMoveSystem())
                 .Add(new AnimationSystem())
-                .Add(new EnemyFollowSystem())
+                .Add(new AgentFollowSystem())
                 .Add(new AggroTimerSystem())
                 ;
         }
