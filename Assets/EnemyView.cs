@@ -1,10 +1,9 @@
-﻿using Leopotam.Ecs;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyView : MonoBehaviour
 {
-    public EcsEntity entity;
+    public EntityView EntityView;
     public NavMeshAgent navMeshAgent;
     public Animator animator;
     public float meleeAttackDistance;

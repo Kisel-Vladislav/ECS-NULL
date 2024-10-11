@@ -2,12 +2,8 @@
 
 namespace CodeBase.ECS.Component.Enemy
 {
-    public struct Follow
+    public struct EnterAggro
     {
         public Transform target;
-    }
-    public struct AggroTimer
-    {
-        public float Cooldown;
     }
 }

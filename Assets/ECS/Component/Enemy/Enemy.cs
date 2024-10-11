@@ -13,12 +13,4 @@ namespace CodeBase.ECS.Component.Enemy
         public float meleeAttackInterval;
         public int damage;
     }
-    public struct ExitAggro
-    {
-        public Transform target;
-    }
-    public struct EnterAggro
-    {
-        public Transform target;
-    }
 }
