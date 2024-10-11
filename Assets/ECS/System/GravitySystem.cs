@@ -1,5 +1,4 @@
-﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.PlayerComponent;
+﻿using CodeBase.ECS.PlayerComponent;
 using Leopotam.Ecs;
 using UnityEngine;
 namespace CodeBase.ECS.System
