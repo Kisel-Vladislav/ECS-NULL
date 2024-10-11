@@ -35,11 +35,15 @@ namespace CodeBase.ECS.PlayerSystem
         private void InitializePlayerComponents(EcsEntity playerEntity)
         {
             ref var player = ref playerEntity.Get<PlayerMove>();
-
             ref var transformRef = ref playerEntity.Get<TransformRef>();
+            ref var health = ref playerEntity.Get<Health>();
 
             var playerGameObject = Object.Instantiate(configuration.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
 
+            var entityView = playerGameObject.GetComponent<EntityView>();
+            entityView.Entity = playerEntity;
+
+            health.value = 100; // TO DO to static data
             transformRef.transform = playerGameObject.GetComponent<Transform>();
 
             player.playerSpeed = configuration.PlayerSpeed;

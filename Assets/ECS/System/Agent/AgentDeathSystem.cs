@@ -12,7 +12,6 @@ namespace CodeBase.ECS.System.Agent
         {
             foreach (var i in deadEnemies)
             {
-                ref var enemy = ref deadEnemies.Get1(i);
                 ref var transform = ref deadEnemies.Get2(i);
                 ref var animatorRef = ref deadEnemies.Get3(i);
                 animatorRef.animator.SetTrigger("Die");
