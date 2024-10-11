@@ -1,9 +1,9 @@
 ﻿using UnityEngine.AI;
 using UnityEngine;
 
-namespace CodeBase.ECS.Component.Enemy
+namespace CodeBase.ECS.Component.Agent
 {
-    public struct EnemyComponent
+    public struct AgentComponent
     {
         public NavMeshAgent navMeshAgent;
         public Animator animator;

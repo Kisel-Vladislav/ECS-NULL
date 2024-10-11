@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyView : MonoBehaviour
+public class AgentView : MonoBehaviour
 {
     public EntityView EntityView;
     public NavMeshAgent navMeshAgent;

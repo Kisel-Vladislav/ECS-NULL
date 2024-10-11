@@ -1,5 +1,5 @@
 ﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -8,7 +8,7 @@ namespace CodeBase.ECS.System.Agent
 {
     public class AgentAttackSystem : IEcsRunSystem
     {
-        private EcsFilter<EnemyComponent, Follow, TransformRef, HasWeapon> _filter;
+        private EcsFilter<AgentComponent, Follow, TransformRef, HasWeapon> _filter;
 
         public void Run()
         {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.ECS.Component.Enemy
+namespace CodeBase.ECS.Component.Agent
 {
-    public struct ExitAggro
+    public struct EnterAggro
     {
         public Transform target;
     }

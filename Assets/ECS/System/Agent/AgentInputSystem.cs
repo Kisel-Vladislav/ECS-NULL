@@ -1,12 +1,12 @@
 ﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 
 namespace CodeBase.ECS.System.Agent
 {
     public class AgentInputSystem : IEcsRunSystem
     {
-        private EcsFilter<EnemyComponent> _filter;
+        private EcsFilter<AgentComponent> _filter;
         public void Run()
         {
             foreach (var i in _filter)

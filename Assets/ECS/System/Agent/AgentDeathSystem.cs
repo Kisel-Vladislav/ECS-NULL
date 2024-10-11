@@ -1,12 +1,12 @@
 ﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 
 namespace CodeBase.ECS.System.Agent
 {
-    public class EnemyDeathSystem : IEcsRunSystem
+    public class AgentDeathSystem : IEcsRunSystem
     {
-        private EcsFilter<EnemyComponent, DeathEvent, AnimatorRef> deadEnemies;
+        private EcsFilter<AgentComponent, DeathEvent, AnimatorRef> deadEnemies;
 
         public void Run()
         {

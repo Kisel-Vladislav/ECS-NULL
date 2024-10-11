@@ -86,7 +86,7 @@ namespace CodeBase.ECS
                 .Add(new SpawnProjectileSystem())
                 .Add(new ProjectileHitSystem())
                 .Add(new DamageSystem())
-                .Add(new EnemyDeathSystem())
+                .Add(new AgentDeathSystem())
                 .Add(new ProjectileMoveSystem())
                 .Add(new AnimationSystem())
                 .Add(new AgentFollowSystem())

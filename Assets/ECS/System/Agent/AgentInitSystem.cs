@@ -1,5 +1,5 @@
 ﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.Data;
 using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
@@ -14,21 +14,21 @@ namespace CodeBase.ECS.System.Agent
 
         public void Init()
         {
-            foreach (var enemyView in Object.FindObjectsOfType<EnemyView>())
+            foreach (var enemyView in Object.FindObjectsOfType<AgentView>())
             {
                 var enemyEntity = InitializeEnemyEntity(enemyView);
                 InitializeWeaponForEnemy(ref enemyEntity, enemyView);
             }
         }
 
-        private EcsEntity InitializeEnemyEntity(EnemyView enemyView)
+        private EcsEntity InitializeEnemyEntity(AgentView enemyView)
         {
             var enemyEntity = _world.NewEntity();
 
             var aggro = enemyView.GetComponentInChildren<Aggro>();
             aggro.entity = enemyEntity;
 
-            ref var enemy = ref enemyEntity.Get<EnemyComponent>();
+            ref var enemy = ref enemyEntity.Get<AgentComponent>();
             ref var health = ref enemyEntity.Get<Health>();
             ref var animatorRef = ref enemyEntity.Get<AnimatorRef>();
             ref var transformRef = ref enemyEntity.Get<TransformRef>();
@@ -50,7 +50,7 @@ namespace CodeBase.ECS.System.Agent
             return enemyEntity;
         }
 
-        private void InitializeWeaponForEnemy(ref EcsEntity enemyEntity, EnemyView enemyView)
+        private void InitializeWeaponForEnemy(ref EcsEntity enemyEntity, AgentView enemyView)
         {
             ref var hasWeapon = ref enemyEntity.Get<HasWeapon>();
             var weaponEntity = _world.NewEntity();

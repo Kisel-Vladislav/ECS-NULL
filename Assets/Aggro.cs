@@ -1,4 +1,4 @@
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 using UnityEngine;
 

@@ -1,12 +1,12 @@
 ﻿using CodeBase.ECS.Component;
-using CodeBase.ECS.Component.Enemy;
+using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 
 namespace CodeBase.ECS.System.Agent
 {
     public class AgentFollowSystem : IEcsRunSystem
     {
-        private EcsFilter<EnemyComponent, Follow, AnimatorRef> followingEnemies;
+        private EcsFilter<AgentComponent, Follow, AnimatorRef> followingEnemies;
 
         public void Run()
         {
