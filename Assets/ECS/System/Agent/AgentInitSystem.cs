@@ -36,15 +36,8 @@ namespace CodeBase.ECS.System.Agent
             enemyView.EntityView.Entity = enemyEntity;
 
             health.value = enemyView.startHealth;
-            enemy.damage = enemyView.damage;
-            enemy.meleeAttackDistance = enemyView.meleeAttackDistance;
             enemy.navMeshAgent = enemyView.navMeshAgent;
-
-            enemy.transform = enemyView.transform;
             transformRef.transform = enemyView.transform;
-
-            enemy.meleeAttackInterval = enemyView.meleeAttackInterval;
-            enemy.triggerDistance = enemyView.triggerDistance;
             animatorRef.animator = enemyView.animator;
 
             return enemyEntity;
