@@ -19,7 +19,8 @@ namespace CodeBase.ECS.System.Agent
                 ref var transform = ref _filter.Get3(i);
                 ref var hasWeapon = ref _filter.Get4(i);
 
-                var ray = new Ray(transform.transform.position, follow.target.position.normalized);
+                var ray = new Ray(transform.transform.position, (follow.target.position - transform.transform.position).normalized);
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
                 if (Physics.Raycast(ray, 100)) // TO DO Weapon.EffectiveDistance
                     StartAimingAndShoot(ref entity, ref follow, ref hasWeapon);
