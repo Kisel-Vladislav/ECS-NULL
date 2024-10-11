@@ -20,7 +20,7 @@ namespace CodeBase.ECS.WeaponSystem
 
                 var displacementSinceLastFrame = position - projectile.previousPos;
                 var hit = Physics.SphereCast(projectile.previousPos, projectile.radius,
-               displacementSinceLastFrame.normalized, out var hitInfo, displacementSinceLastFrame.magnitude);
+                displacementSinceLastFrame.normalized, out var hitInfo, displacementSinceLastFrame.magnitude);
 
                 if (hit)
                 {
