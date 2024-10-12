@@ -6,6 +6,9 @@ namespace CodeBase.ECS.WeaponSystem
 {
     public class ProjectileMoveSystem : IEcsRunSystem
     {
+        private const int LayerAggroZone = 6;
+        private const int LayerMask = ~(1  << LayerAggroZone);
+
         private EcsFilter<Projectile> _filter;
 
         public void Run()
@@ -20,7 +23,7 @@ namespace CodeBase.ECS.WeaponSystem
 
                 var displacementSinceLastFrame = position - projectile.previousPos;
                 var hit = Physics.SphereCast(projectile.previousPos, projectile.radius,
-                displacementSinceLastFrame.normalized, out var hitInfo, displacementSinceLastFrame.magnitude);
+                displacementSinceLastFrame.normalized, out var hitInfo, displacementSinceLastFrame.magnitude,LayerMask);
 
                 if (hit)
                 {
