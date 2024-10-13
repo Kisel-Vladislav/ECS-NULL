@@ -6,7 +6,7 @@ namespace CodeBase.ECS.System.Agent
 {
     public class AggroTimerSystem : IEcsRunSystem
     {
-        private EcsFilter<AggroTimer> _filter;
+        private EcsFilter<AggroTimer,AgentComponent,Follow> _filter;
         public void Run()
         {
             UpdateAggroTimers();
@@ -20,13 +20,18 @@ namespace CodeBase.ECS.System.Agent
                 timer.Cooldown -= Time.deltaTime;
 
                 if (timer.Cooldown <= 0)
-                    RemoveAggroTimer(i);
+                    UnAggro(i);
             }
         }
-        private void RemoveAggroTimer(int i)
+        private void UnAggro(int i)
         {
             ref var entity = ref _filter.GetEntity(i);
+            ref var agentComponent = ref _filter.Get2(i);
+
+            agentComponent.navMeshAgent.enabled = false;
+
             entity.Del<AggroTimer>();
+            entity.Del<Follow>();
         }
     }
 }

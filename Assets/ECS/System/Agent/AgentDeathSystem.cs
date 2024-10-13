@@ -18,7 +18,6 @@ namespace CodeBase.ECS.System.Agent
                 ref var animatorRef = ref deadAgents.Get3(i);
                 ref var transform = ref deadAgents.Get2(i);
 
-                agentComponent.navMeshAgent.SetDestination(transform.transform.position);
                 agentComponent.navMeshAgent.enabled = false;
 
                 animatorRef.animator.SetTrigger("Die");

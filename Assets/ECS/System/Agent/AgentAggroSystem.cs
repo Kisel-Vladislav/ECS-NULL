@@ -33,6 +33,8 @@ namespace CodeBase.ECS.System.Agent
                 ref var entity = ref _enterFilter.GetEntity(i);
                 ref var aggroTarget = ref _enterFilter.Get1(i);
 
+                entity.Del<AggroTimer>();
+
                 ref var follow = ref entity.Get<Follow>();
                 follow.Target = aggroTarget.target;
                 follow.Entity = aggroTarget.target.GetComponent<EntityView>().Entity;

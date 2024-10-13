@@ -1,6 +1,7 @@
 ﻿using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace CodeBase.ECS.System.Agent
 {

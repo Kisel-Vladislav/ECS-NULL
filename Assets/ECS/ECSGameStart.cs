@@ -8,6 +8,7 @@ using CodeBase.ECS.WeaponSystem;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.UI;
 using Leopotam.Ecs;
+using System;
 using UnityEngine;
 using Voody.UniLeo;
 using Zenject;
@@ -48,10 +49,80 @@ namespace CodeBase.ECS
             _systems.ConvertScene();
             _runtimeData = new RuntimeData();
 
-            AddSystems();
+            AddInitSystems();
+            AddInputSystems();
+            AddMoveSystems();
+            AddAttackSystems();
+            AddDeathSystems();
+            AddAnimationSystems();
+
+            //AddSystems();
             Inject();
 
             _systems.Init();
+        }
+
+        private void AddAnimationSystems()
+        {
+            _systems
+                .Add(new AimSystem())
+                .Add(new AnimationSystem())
+                ;
+        }
+
+        private void AddDeathSystems()
+        {
+            _systems
+                .Add(new AgentDeathSystem())
+                .Add(new PlayerDeathSystem())
+                ;
+        }
+
+        private void AddAttackSystems()
+        {
+            _systems
+                .Add(new AgentAttackSystem())
+                .Add(new WeaponBlockSystem())
+                .Add(new WeaponShootSystem())
+                .Add(new ReloadingSystem())
+                .Add(new SpawnProjectileSystem())
+                .Add(new ProjectileHitSystem())
+                .Add(new DamageSystem())
+                ;
+        }
+
+        private void AddMoveSystems()
+        {
+            _systems
+                .Add(new GravitySystem())
+                .Add(new PlayerMoveSystem())
+                .Add(new LookAtSystem())
+                .Add(new CameraFollowSystem())
+                .Add(new PlayerRotationSystem())
+                .Add(new AgentFollowSystem())
+                .Add(new AggroTimerSystem())
+                .Add(new AgentAggroSystem())
+                .Add(new ProjectileMoveSystem())
+                ;
+        }
+
+        private void AddInputSystems()
+        {
+            _systems
+                .OneFrame<TryReload>()
+                .OneFrame<TryAim>()
+                .Add(new PlayerInputSystem())
+                .Add(new AgentInputSystem())
+                .Add(new ReloadingSystem())
+                ;
+        }
+
+        private void AddInitSystems()
+        {
+            _systems
+                .Add(new PlayerInitSystem())
+                .Add(new AgentInitSystem())
+                ;
         }
 
         private void Inject()
