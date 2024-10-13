@@ -22,7 +22,7 @@ namespace CodeBase.ECS.System.Agent
                 var ray = new Ray(transform.transform.position, (follow.Target.position - transform.transform.position).normalized);
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
-                if (Physics.Raycast(ray, 100)) // TO DO Weapon.EffectiveDistance
+                if (Physics.Raycast(ray, 100) && follow.Entity.IsAlive()) // TO DO Weapon.EffectiveDistance
                     StartAimingAndShoot(ref entity, ref follow, ref hasWeapon);
                 else
                     StopAiming(ref entity);
