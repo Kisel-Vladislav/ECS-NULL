@@ -12,12 +12,22 @@ namespace CodeBase.ECS.System.Agent
         {
             foreach (var i in followingEnemies)
             {
+                ref var entity = ref followingEnemies.GetEntity(i);
                 ref var enemy = ref followingEnemies.Get1(i);
                 ref var follow = ref followingEnemies.Get2(i);
 
-                var targetPos = follow.target.position;
+                if (follow.Entity.IsAlive())
+                {
+                    enemy.navMeshAgent.enabled = true;
+                    var targetPos = follow.Target.position;
+                    enemy.navMeshAgent.SetDestination(targetPos);
+                }
+                else
+                {
+                    enemy.navMeshAgent.enabled = false;
+                    entity.Del<Follow>();
+                }
 
-                enemy.navMeshAgent.SetDestination(targetPos);
             }
         }
     }

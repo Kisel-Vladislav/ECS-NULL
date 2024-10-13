@@ -19,7 +19,7 @@ namespace CodeBase.ECS.System.Agent
                 ref var transform = ref _filter.Get3(i);
                 ref var hasWeapon = ref _filter.Get4(i);
 
-                var ray = new Ray(transform.transform.position, (follow.target.position - transform.transform.position).normalized);
+                var ray = new Ray(transform.transform.position, (follow.Target.position - transform.transform.position).normalized);
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
                 if (Physics.Raycast(ray, 100)) // TO DO Weapon.EffectiveDistance
@@ -40,7 +40,7 @@ namespace CodeBase.ECS.System.Agent
         {
             entity.Get<TryAim>();
             ref var lookAt = ref entity.Get<LookAt>();
-            lookAt.transform = follow.target.transform;
+            lookAt.transform = follow.Target.transform;
             hasWeapon.weapon.Get<Shoot>();
         }
     }
