@@ -1,5 +1,6 @@
 ﻿using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace CodeBase.ECS.WeaponSystem
 {
@@ -11,23 +12,36 @@ namespace CodeBase.ECS.WeaponSystem
         {
             foreach (var i in _filter)
             {
+                ref var projectileEntity = ref _filter.GetEntity(i);
                 ref var projectile = ref _filter.Get1(i);
                 ref var hit = ref _filter.Get2(i);
 
                 var hitObject = hit.HitGameObject;
-                if (hitObject.TryGetComponent<EntityView>(out var entityView))
+                if (TryHandleDamage(hitObject, projectile.damage))
                 {
-                    if (entityView.Entity.IsAlive())
-                    {
-                        ref var e = ref _world.NewEntity().Get<DamageEvent>();
-                        e.Target = entityView.Entity;
-                        e.Value = projectile.damage;
-                    }
+                    DisableProjectile(ref _filter.GetEntity(i), projectile);
                 }
-
-                projectile.projectileGO.SetActive(false);
-                _filter.GetEntity(i).Destroy();
+                projectileEntity.Destroy();
+            }   
+        }
+        private bool TryHandleDamage(GameObject hitObject, int damage)
+        {
+            if (hitObject.TryGetComponent<EntityView>(out var entityView))
+            {
+                if (entityView.Entity.IsAlive())
+                {
+                    ref var damageEvent = ref _world.NewEntity().Get<DamageEvent>();
+                    damageEvent.Target = entityView.Entity;
+                    damageEvent.Value = damage;
+                    return true;
+                }
             }
+            return false;
+        }
+
+        private void DisableProjectile(ref EcsEntity projectileEntity, Projectile projectile)
+        {
+            projectile.projectileGO.SetActive(false);
         }
     }
 }
