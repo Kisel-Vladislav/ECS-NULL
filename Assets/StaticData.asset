@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 564008150529913243, guid: c53cd6d6aa372c6418ddecd6ead5cd58,
     type: 3}
-  PlayerSpeed: 3
+  PlayerSpeed: 5
   SmoothTime: 0.5
   FollowOffset: {x: 0, y: 15, z: -13}

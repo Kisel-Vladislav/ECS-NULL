@@ -22,6 +22,8 @@ namespace CodeBase.ECS.System.Agent
                 ref var entity = ref _exitFilter.GetEntity(i);
                 ref var timer = ref entity.Get<AggroTimer>();
                 timer.Cooldown = AggroCooldown;
+
+                entity.Del<ExitAggro>();
             }
         }
         private void AggroEnter()
@@ -34,6 +36,8 @@ namespace CodeBase.ECS.System.Agent
                 ref var follow = ref entity.Get<Follow>();
                 follow.Target = aggroTarget.target;
                 follow.Entity = aggroTarget.target.GetComponent<EntityView>().Entity;
+
+                entity.Del<EnterAggro>();
             }
         }
     }
