@@ -3,6 +3,6 @@ namespace CodeBase.ECS.WeaponComponent
 {
     public struct ProjectileHit
     {
-        internal RaycastHit raycastHit;
+        public GameObject HitGameObject;
     }
 }   

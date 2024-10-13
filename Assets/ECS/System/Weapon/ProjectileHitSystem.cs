@@ -14,7 +14,8 @@ namespace CodeBase.ECS.WeaponSystem
                 ref var projectile = ref _filter.Get1(i);
                 ref var hit = ref _filter.Get2(i);
 
-                if (hit.raycastHit.collider.gameObject.TryGetComponent(out EntityView entityView))
+                var hitObject = hit.HitGameObject;
+                if (hitObject.TryGetComponent<EntityView>(out var entityView))
                 {
                     if (entityView.Entity.IsAlive())
                     {
