@@ -17,7 +17,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 4417039108053898737, guid: 5560a79d5752533469b10501b607fa10,
     type: 3}
   ProjectileSocket: {fileID: 0}
-  ProjectileSpeed: 5
+  ProjectileSpeed: 10
   ProjectileRadius: 0.1
   WeaponDamage: 25
   CurrentInMagazine: 50

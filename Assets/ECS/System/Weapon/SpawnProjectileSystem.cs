@@ -15,7 +15,7 @@ namespace CodeBase.ECS.WeaponSystem
             {
                 ref var weapon = ref filter.Get1(i);
 
-                var projectileGO = Object.Instantiate(weapon.projectilePrefab, weapon.projectileSocket.position, Quaternion.identity);
+                var projectileGO = Object.Instantiate(weapon.projectilePrefab, weapon.projectileSocket.position, weapon.projectileSocket.rotation);
                 var projectileEntity = ecsWorld.NewEntity();
 
                 ref var projectile = ref projectileEntity.Get<Projectile>();
