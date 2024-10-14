@@ -3,6 +3,7 @@ using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
+using System.Text;
 using UnityEngine;
 
 namespace CodeBase.ECS.System.Agent
@@ -37,7 +38,7 @@ namespace CodeBase.ECS.System.Agent
                 }
 
                 if (Physics.Raycast(ray,out var hitInfo, 100f) && hitInfo.collider.gameObject == attackTarget.Target.gameObject) // TO DO Weapon.EffectiveDistance
-                    StartAimingAndShoot(ref entity, ref attackTarget, ref hasWeapon);
+                    TryShoot(ref entity, ref attackTarget, ref hasWeapon);
                 else
                     StopAiming(ref entity);
             }
@@ -63,12 +64,18 @@ namespace CodeBase.ECS.System.Agent
 
             entity.Del<LookAt>();
         }
-        private void StartAimingAndShoot(ref EcsEntity entity, ref AttackTarget attackTarget, ref HasWeapon hasWeapon)
+        private void TryShoot(ref EcsEntity entity, ref AttackTarget attackTarget, ref HasWeapon hasWeapon)
         {
-            entity.Get<TryAim>();
-            ref var lookAt = ref entity.Get<LookAt>();
-            lookAt.transform = attackTarget.Target.transform;
-            hasWeapon.weapon.Get<Shoot>();
+            ref var weapon = ref hasWeapon.weapon.Get<Weapon>();
+            if(weapon.currentInMagazine > 0)
+            { 
+                entity.Get<TryAim>();
+                ref var lookAt = ref entity.Get<LookAt>();
+                lookAt.transform = attackTarget.Target.transform;
+                hasWeapon.weapon.Get<Shoot>();
+            }
+            else
+                entity.Get<TryReload>();
         }
     }
 }

@@ -39,6 +39,10 @@ namespace CodeBase.ECS.System.Agent
             health.value = enemyView.startHealth;
             enemy.navMeshAgent = enemyView.navMeshAgent;
             transformRef.transform = enemyView.transform;
+
+            var playerAnimatorStateReader = enemyView.GetComponent<AgentAnimatorStateReader>();
+            playerAnimatorStateReader.entity = enemyEntity;
+
             animatorRef.animator = enemyView.animator;
 
             return enemyEntity;

@@ -49,12 +49,12 @@ namespace CodeBase.ECS.PlayerSystem
             player.playerSpeed = configuration.PlayerSpeed;
             player.CharacterController = playerGameObject.GetComponent<CharacterController>();
 
-            InitializePlayerAnimator(playerEntity, playerGameObject);
+            InitializeAnimator(playerEntity, playerGameObject);
         }
 
-        private void InitializePlayerAnimator(EcsEntity playerEntity, GameObject playerGameObject)
+        private void InitializeAnimator(EcsEntity playerEntity, GameObject playerGameObject)
         {
-            var playerAnimatorStateReader = playerGameObject.GetComponent<PlayerAnimatorStateReader>();
+            var playerAnimatorStateReader = playerGameObject.GetComponent<AgentAnimatorStateReader>();
             playerAnimatorStateReader.entity = playerEntity;
 
             ref var animatorRef = ref playerEntity.Get<AnimatorRef>();

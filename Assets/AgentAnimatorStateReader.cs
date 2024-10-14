@@ -2,7 +2,7 @@ using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
 using UnityEngine;
 
-public class PlayerAnimatorStateReader : MonoBehaviour, IAnimationStateReader
+public class AgentAnimatorStateReader : MonoBehaviour, IAnimationStateReader
 {
     public EcsEntity entity;
     private readonly int _reloadStateHash = Animator.StringToHash("reload");

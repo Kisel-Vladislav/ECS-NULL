@@ -16,19 +16,16 @@ namespace CodeBase.ECS.WeaponSystem
                 ref var weapon = ref _filter.Get1(i);
                 ref var entity = ref _filter.GetEntity(i);
                 entity.Del<Shoot>();
-                if (weapon.currentInMagazine > 0)
-                {
-                    weapon.currentInMagazine--;
-                    ref var spawnProjectile = ref entity.Get<SpawnProjectile>();
 
-                    ref var block = ref entity.Get<BlockShootDuration>();
-                    block.Timer = weapon.Cooldown;
-                    Hud.SetAmmo(weapon.currentInMagazine, weapon.totalAmmo);
-                }
-                else
-                {
-                    ref var reload = ref entity.Get<TryReload>();
-                }
+                if (weapon.currentInMagazine <= 0)
+                    continue;
+
+                weapon.currentInMagazine--;
+                ref var spawnProjectile = ref entity.Get<SpawnProjectile>();
+
+                ref var block = ref entity.Get<BlockShootDuration>();
+                block.Timer = weapon.Cooldown;
+                Hud.SetAmmo(weapon.currentInMagazine, weapon.totalAmmo);
 
             }
         }
