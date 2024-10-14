@@ -29,7 +29,7 @@ namespace CodeBase.ECS.System.Agent
             ref var agentComponent = ref _filter.Get2(i);
 
             agentComponent.navMeshAgent.enabled = false;
-
+            entity.Get<TryAggro>();
             entity.Del<AggroTimer>();
             entity.Del<Follow>();
         }

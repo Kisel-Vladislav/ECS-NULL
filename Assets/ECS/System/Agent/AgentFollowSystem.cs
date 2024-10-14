@@ -27,6 +27,7 @@ namespace CodeBase.ECS.System.Agent
                 {
                     enemy.navMeshAgent.enabled = false;
                     entity.Del<Follow>();
+                    entity.Get<TryAggro>();
                 }
 
             }
