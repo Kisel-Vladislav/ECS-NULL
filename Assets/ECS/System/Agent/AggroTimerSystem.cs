@@ -30,6 +30,8 @@ namespace CodeBase.ECS.System.Agent
 
             agentComponent.navMeshAgent.enabled = false;
             entity.Get<TryAggro>();
+            entity.Get<StopAttack>();
+
             entity.Del<AggroTimer>();
             entity.Del<Follow>();
         }

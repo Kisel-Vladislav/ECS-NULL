@@ -88,6 +88,7 @@ namespace CodeBase.ECS
                 .Add(new SpawnProjectileSystem())
                 .Add(new ProjectileHitSystem())
                 .Add(new DamageSystem())
+                .Add(new AggroTimerSystem())
                 ;
         }
 
@@ -100,7 +101,7 @@ namespace CodeBase.ECS
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new AgentFollowSystem())
-                .Add(new AggroTimerSystem())
+                //.Add(new AggroTimerSystem())
                 .Add(new AgentAggroSystem())
                 .Add(new ProjectileMoveSystem())
                 ;

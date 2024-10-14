@@ -73,11 +73,18 @@ namespace CodeBase.ECS.System.Agent
                 ref var entity = ref _enterFilter.GetEntity(i);
                 ref var aggroTarget = ref _enterFilter.Get1(i);
 
+                var transformTarget = aggroTarget.target;
+                var targetEntity = aggroTarget.target.GetComponent<EntityView>().Entity;
+
                 entity.Del<AggroTimer>();
 
                 ref var follow = ref entity.Get<Follow>();
-                follow.Target = aggroTarget.target;
-                follow.Entity = aggroTarget.target.GetComponent<EntityView>().Entity;
+                follow.Target = transformTarget;
+                follow.Entity = targetEntity;
+
+                ref var attackTarget = ref entity.Get<AttackTarget>();
+                attackTarget.Target = transformTarget;
+                attackTarget.Entity = targetEntity;
 
                 entity.Del<EnterAggro>();
             }

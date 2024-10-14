@@ -8,39 +8,65 @@ namespace CodeBase.ECS.System.Agent
 {
     public class AgentAttackSystem : IEcsRunSystem
     {
-        private EcsFilter<AgentComponent, Follow, TransformRef, HasWeapon> _filter;
+        private EcsFilter<AgentComponent, AttackTarget, TransformRef, HasWeapon> _attackFilter;
+        private EcsFilter<AgentComponent, StopAttack> _stopAttackFilter;
 
         public void Run()
         {
-            foreach (var i in _filter)
-            {
-                ref var entity = ref _filter.GetEntity(i);
-                ref var follow = ref _filter.Get2(i);
-                ref var transform = ref _filter.Get3(i);
-                ref var hasWeapon = ref _filter.Get4(i);
+            StopAttack();
+            Attack();
+        }
 
-                var ray = new Ray(transform.transform.position, (follow.Target.position - transform.transform.position).normalized);
+        private void Attack()
+        {
+            foreach (var i in _attackFilter)
+            {
+                ref var entity = ref _attackFilter.GetEntity(i);
+                ref var attackTarget = ref _attackFilter.Get2(i);
+                ref var transform = ref _attackFilter.Get3(i);
+                ref var hasWeapon = ref _attackFilter.Get4(i);
+
+                var ray = new Ray(transform.transform.position, (attackTarget.Target.position - transform.transform.position).normalized);
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
-                if (Physics.Raycast(ray, 100) && follow.Entity.IsAlive()) // TO DO Weapon.EffectiveDistance
-                    StartAimingAndShoot(ref entity, ref follow, ref hasWeapon);
+                if (!attackTarget.Entity.IsAlive())
+                {
+                    StopAimingAndClearTarget(ref entity);
+                    continue;
+                }
+
+                if (Physics.Raycast(ray, 100f)) // TO DO Weapon.EffectiveDistance
+                    StartAimingAndShoot(ref entity, ref attackTarget, ref hasWeapon);
                 else
                     StopAiming(ref entity);
-
             }
         }
 
-        private static void StopAiming(ref EcsEntity entity)
+        private void StopAttack()
+        {
+            foreach (var i in _stopAttackFilter)
+            {
+                ref var entity = ref _stopAttackFilter.GetEntity(i);
+                StopAimingAndClearTarget(ref entity);
+                entity.Del<StopAttack>();
+            }
+        }
+        private void StopAimingAndClearTarget(ref EcsEntity entity)
+        {
+            StopAiming(ref entity);
+            entity.Del<AttackTarget>();
+        }
+        private void StopAiming(ref EcsEntity entity)
         {
             entity.Get<AimFinished>();
+
             entity.Del<LookAt>();
         }
-
-        private static void StartAimingAndShoot(ref EcsEntity entity, ref Follow follow, ref HasWeapon hasWeapon)
+        private void StartAimingAndShoot(ref EcsEntity entity, ref AttackTarget attackTarget, ref HasWeapon hasWeapon)
         {
             entity.Get<TryAim>();
             ref var lookAt = ref entity.Get<LookAt>();
-            lookAt.transform = follow.Target.transform;
+            lookAt.transform = attackTarget.Target.transform;
             hasWeapon.weapon.Get<Shoot>();
         }
     }

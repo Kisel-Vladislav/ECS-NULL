@@ -18,6 +18,7 @@ namespace CodeBase.ECS.System.Agent
             {
                 var enemyEntity = InitializeEnemyEntity(enemyView);
                 InitializeWeaponForEnemy(ref enemyEntity, enemyView);
+                enemyEntity.Get<TryAggro>();
             }
         }
 
