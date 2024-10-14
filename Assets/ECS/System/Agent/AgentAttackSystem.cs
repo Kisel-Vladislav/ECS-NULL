@@ -1,4 +1,5 @@
-﻿using CodeBase.ECS.Component;
+﻿using Assets;
+using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
@@ -26,7 +27,7 @@ namespace CodeBase.ECS.System.Agent
                 ref var transform = ref _attackFilter.Get3(i);
                 ref var hasWeapon = ref _attackFilter.Get4(i);
 
-                var ray = new Ray(transform.transform.position, (attackTarget.Target.position - transform.transform.position).normalized);
+                var ray = new Ray(transform.transform.position.AddY(1f), (attackTarget.Target.position - transform.transform.position).normalized);
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
 
                 if (!attackTarget.Entity.IsAlive())
@@ -35,7 +36,7 @@ namespace CodeBase.ECS.System.Agent
                     continue;
                 }
 
-                if (Physics.Raycast(ray, 100f)) // TO DO Weapon.EffectiveDistance
+                if (Physics.Raycast(ray,out var hitInfo, 100f) && hitInfo.collider.gameObject == attackTarget.Target.gameObject) // TO DO Weapon.EffectiveDistance
                     StartAimingAndShoot(ref entity, ref attackTarget, ref hasWeapon);
                 else
                     StopAiming(ref entity);

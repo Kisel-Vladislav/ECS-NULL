@@ -23,4 +23,4 @@ MonoBehaviour:
   CurrentInMagazine: 500
   MaxInMagazine: 500
   TotalAmmo: 500
-  Cooldown: 0.1
+  Cooldown: 0.3
