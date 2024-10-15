@@ -37,6 +37,10 @@ namespace CodeBase.ECS.PlayerSystem
                         entity.Get<TryReload>();
                     }
                 }
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    entity.Get<TryDodge>();
+                }
             }
         }
     }

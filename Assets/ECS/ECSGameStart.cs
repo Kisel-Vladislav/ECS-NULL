@@ -1,5 +1,6 @@
 using CodeBase.ECS.Component;
 using CodeBase.ECS.Data;
+using CodeBase.ECS.PlayerComponent;
 using CodeBase.ECS.PlayerSystem;
 using CodeBase.ECS.System;
 using CodeBase.ECS.System.Agent;
@@ -97,6 +98,7 @@ namespace CodeBase.ECS
             _systems
                 .Add(new GravitySystem())
                 .Add(new PlayerMoveSystem())
+                .Add(new PlayerDodgeSystem())
                 .Add(new LookAtSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new PlayerRotationSystem())
@@ -110,6 +112,7 @@ namespace CodeBase.ECS
         private void AddInputSystems()
         {
             _systems
+                .OneFrame<TryDodge>()
                 .OneFrame<TryReload>()
                 .OneFrame<TryAim>()
                 .Add(new PlayerInputSystem())

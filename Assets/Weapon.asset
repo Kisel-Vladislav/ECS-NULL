@@ -20,7 +20,7 @@ MonoBehaviour:
   ProjectileSpeed: 10
   ProjectileRadius: 0.1
   WeaponDamage: 25
-  CurrentInMagazine: 500
+  CurrentInMagazine: 1
   MaxInMagazine: 500
   TotalAmmo: 500
   Cooldown: 0.3
