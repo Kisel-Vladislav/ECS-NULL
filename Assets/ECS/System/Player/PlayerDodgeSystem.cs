@@ -65,7 +65,7 @@ namespace CodeBase.ECS.System
                 ref var transformRef = ref _dodgingfilter.Get4(i);
 
                 var dodgeDirection = moveInput.vector.normalized;
-                transformRef.transform.position += dodgeDirection * DodgeSpeed * Time.deltaTime;
+                playerMove.CharacterController.Move(dodgeDirection* DodgeSpeed * Time.deltaTime);
                 ref var blockDodgeDuration = ref _dodgingfilter.GetEntity(i).Get<BlockDodgeDuration>();
                 blockDodgeDuration.Duration = DodgeCooldown;
             }
