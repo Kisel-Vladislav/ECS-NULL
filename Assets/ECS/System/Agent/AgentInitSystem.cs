@@ -11,10 +11,10 @@ namespace CodeBase.ECS.System.Agent
     {
         private EcsWorld _world;
         private WeaponSettings _weaponSettings;
-
+        private SceneData _sceneData;
         public void Init()
         {
-            foreach (var enemyView in Object.FindObjectsOfType<AgentView>())
+            foreach (var enemyView in _sceneData.Enemy)
             {
                 var enemyEntity = InitializeEnemyEntity(enemyView);
                 InitializeWeaponForEnemy(ref enemyEntity, enemyView);
