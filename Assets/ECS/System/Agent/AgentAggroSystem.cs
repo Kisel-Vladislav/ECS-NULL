@@ -17,7 +17,7 @@ namespace CodeBase.ECS.System.Agent
 
         private EcsFilter<EnterAggro> _enterFilter;
         private EcsFilter<ExitAggro> _exitFilter;
-        private EcsFilter<TryAggro, TransformRef> _tryFilter;
+        private EcsFilter<TryAggro, TransformRef, TeamComponent> _tryFilter;
 
         public void Run()
         {
@@ -32,24 +32,32 @@ namespace CodeBase.ECS.System.Agent
             {
                 ref var entity = ref _tryFilter.GetEntity(i);
                 ref var transform = ref _tryFilter.Get2(i);
+                ref var team = ref _tryFilter.Get3(i);
 
                 var position = transform.transform.position;
-                
 
-                Physics.OverlapSphereNonAlloc(position, AggroRange, _hitColliders, LayerMask);
 
-                foreach (var hit in _hitColliders)
+                var colliderCount = Physics.OverlapSphereNonAlloc(position, AggroRange, _hitColliders, LayerMask);
+
+                for (var j = 0; j < colliderCount; j++)
                 {
-                    if(hit == null) 
-                        break;
+                    var hit = _hitColliders[j];
 
-                    if(hit.gameObject == transform.transform.gameObject || !hit.gameObject.GetComponent<EntityView>().Entity.IsAlive())
+                    if (hit.gameObject == transform.transform.gameObject || !hit.gameObject.GetComponent<EntityView>().Entity.IsAlive())
                         continue;
 
-                    ref var enterAggro = ref entity.Get<EnterAggro>();
-                    enterAggro.target = hit.transform;
-                    _hitColliders = new Collider[32];
-                    break;
+                    var targetEntity = hit.gameObject.GetComponent<EntityView>().Entity;
+                    if (targetEntity.Has<TeamComponent>())
+                    {
+                        ref var targetTeam = ref targetEntity.Get<TeamComponent>();
+                        if (team.Team != targetTeam.Team)
+                        {
+                            ref var enterAggro = ref entity.Get<EnterAggro>();
+                            enterAggro.target = hit.transform;
+                            break;
+                        }
+                    }
+
                 }
                 entity.Del<TryAggro>();
             }
@@ -71,6 +79,7 @@ namespace CodeBase.ECS.System.Agent
             foreach (var i in _enterFilter)
             {
                 ref var entity = ref _enterFilter.GetEntity(i);
+
                 ref var aggroTarget = ref _enterFilter.Get1(i);
 
                 var transformTarget = aggroTarget.target;

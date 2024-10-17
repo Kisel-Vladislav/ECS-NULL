@@ -38,7 +38,7 @@ namespace CodeBase.ECS.System.Agent
                 }
 
                 if (Physics.Raycast(ray,out var hitInfo, 100f) && hitInfo.collider.gameObject == attackTarget.Target.gameObject) // TO DO Weapon.EffectiveDistance
-                    TryShoot(ref entity, ref attackTarget, ref hasWeapon);
+                        TryShoot(ref entity, ref attackTarget, ref hasWeapon);
                 else
                     StopAiming(ref entity);
             }

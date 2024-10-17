@@ -1,4 +1,5 @@
 ﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.Data;
 using CodeBase.ECS.PlayerComponent;
 using CodeBase.ECS.WeaponComponent;
@@ -37,6 +38,9 @@ namespace CodeBase.ECS.PlayerSystem
             ref var player = ref playerEntity.Get<PlayerMove>();
             ref var transformRef = ref playerEntity.Get<TransformRef>();
             ref var health = ref playerEntity.Get<Health>();
+            ref var team = ref playerEntity.Get<TeamComponent>();
+
+            team.Team = TeamType.Player;
 
             var playerGameObject = Object.Instantiate(configuration.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
 

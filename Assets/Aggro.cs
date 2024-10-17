@@ -9,8 +9,8 @@ public class Aggro : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ref var aggro = ref entity.Get<EnterAggro>();
-        aggro.target = other.transform;
+        ref var aggro = ref entity.Get<TryAggro>();
+        //aggro.target = other.transform;
     }
     private void OnTriggerExit(Collider other)
     {

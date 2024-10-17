@@ -33,6 +33,9 @@ namespace CodeBase.ECS.System.Agent
             ref var health = ref enemyEntity.Get<Health>();
             ref var animatorRef = ref enemyEntity.Get<AnimatorRef>();
             ref var transformRef = ref enemyEntity.Get<TransformRef>();
+            ref var team = ref enemyEntity.Get<TeamComponent>();
+
+            team.Team = TeamType.Enemy;
 
             enemyView.EntityView.Entity = enemyEntity;
 
