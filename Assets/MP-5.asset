@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab739c2c8ef6901488750bb82dacdcbf, type: 3}
+  m_Name: MP-5
+  m_EditorClassIdentifier: 
+  WeaponPrefab: {fileID: 6034317351468085999, guid: 86e62a1bad75ad74c84fa859092a4947,
+    type: 3}
+  ProjectilePrefab: {fileID: 4417039108053898737, guid: 5560a79d5752533469b10501b607fa10,
+    type: 3}
+  ProjectileSocket: {fileID: 0}
+  ProjectileSpeed: 15
+  ProjectileRadius: 0.1
+  WeaponDamage: 1
+  CurrentInMagazine: 50
+  MaxInMagazine: 50
+  TotalAmmo: 500
+  Cooldown: 0.1

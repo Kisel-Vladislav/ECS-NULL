@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab739c2c8ef6901488750bb82dacdcbf, type: 3}
-  m_Name: Weapon
+  m_Name: RPG
   m_EditorClassIdentifier: 
-  WeaponPrefab: {fileID: 58668543941737882, guid: b809b8f496cc1f34b90a753c1205edcc,
+  WeaponPrefab: {fileID: 6034317351468085999, guid: 86e62a1bad75ad74c84fa859092a4947,
     type: 3}
   ProjectilePrefab: {fileID: 4417039108053898737, guid: 5560a79d5752533469b10501b607fa10,
     type: 3}
   ProjectileSocket: {fileID: 0}
-  ProjectileSpeed: 10
+  ProjectileSpeed: 15
   ProjectileRadius: 0.1
-  WeaponDamage: 25
-  CurrentInMagazine: 1
-  MaxInMagazine: 500
+  WeaponDamage: 1
+  CurrentInMagazine: 50
+  MaxInMagazine: 50
   TotalAmmo: 500
-  Cooldown: 0.3
+  Cooldown: 0.1
