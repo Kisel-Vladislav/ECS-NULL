@@ -8,7 +8,7 @@ namespace CodeBase.ECS.System.Agent
     public class AgentFollowSystem : IEcsRunSystem
     {
         private EcsFilter<AgentComponent, Follow, AnimatorRef, TransformRef> followingEnemies;
-        private const float MinFollowDistance = 1.5f;
+        private const float MinFollowDistance = 2.5f;
 
         public void Run()
         {
@@ -35,7 +35,7 @@ namespace CodeBase.ECS.System.Agent
                 {
                     enemy.navMeshAgent.enabled = false;
                     entity.Del<Follow>();
-                    entity.Get<TryAggro>();
+                    entity.Get<CheckDetectionZone>();
                 }
 
             }

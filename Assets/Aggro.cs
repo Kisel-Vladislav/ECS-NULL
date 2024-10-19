@@ -9,7 +9,7 @@ public class Aggro : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ref var aggro = ref entity.Get<TryAggro>();
+        ref var aggro = ref entity.Get<CheckDetectionZone>();
         //aggro.target = other.transform;
     }
     private void OnTriggerExit(Collider other)

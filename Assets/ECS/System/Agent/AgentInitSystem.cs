@@ -12,56 +12,64 @@ namespace CodeBase.ECS.System.Agent
         private EcsWorld _world;
         private WeaponSettings _weaponSettings;
         private SceneData _sceneData;
+
         public void Init()
         {
             foreach (var enemyView in _sceneData.Enemy)
             {
-                var enemyEntity = InitializeEnemyEntity(enemyView);
-                InitializeWeaponForEnemy(ref enemyEntity, enemyView);
-                enemyEntity.Get<TryAggro>();
+                var enemyEntity = InitializeAgentEntity(enemyView, TeamType.Enemy);
+                InitializeWeaponForAgent(ref enemyEntity, enemyView);
+                enemyEntity.Get<CheckDetectionZone>();
+            }
+
+            foreach (var allyView in _sceneData.Ally)
+            {
+                var allyEntity = InitializeAgentEntity(allyView, TeamType.Ally);
+                InitializeWeaponForAgent(ref allyEntity, allyView);
+                allyEntity.Get<CheckDetectionZone>();
             }
         }
 
-        private EcsEntity InitializeEnemyEntity(AgentView enemyView)
+        private EcsEntity InitializeAgentEntity(AgentView agentView, TeamType teamType)
         {
-            var enemyEntity = _world.NewEntity();
+            var agentEntity = _world.NewEntity();
 
-            var aggro = enemyView.GetComponentInChildren<Aggro>();
-            aggro.entity = enemyEntity;
+            var aggro = agentView.GetComponentInChildren<Aggro>();
+            aggro.entity = agentEntity;
 
-            ref var enemy = ref enemyEntity.Get<AgentComponent>();
-            ref var health = ref enemyEntity.Get<Health>();
-            ref var animatorRef = ref enemyEntity.Get<AnimatorRef>();
-            ref var transformRef = ref enemyEntity.Get<TransformRef>();
-            ref var team = ref enemyEntity.Get<TeamComponent>();
+            ref var agent = ref agentEntity.Get<AgentComponent>();
+            ref var health = ref agentEntity.Get<Health>();
+            ref var animatorRef = ref agentEntity.Get<AnimatorRef>();
+            ref var transformRef = ref agentEntity.Get<TransformRef>();
+            ref var team = ref agentEntity.Get<TeamComponent>();
 
-            team.Team = TeamType.Enemy;
+            team.Team = teamType;
 
-            enemyView.EntityView.Entity = enemyEntity;
+            agentView.EntityView.Entity = agentEntity;
 
-            health.value = enemyView.startHealth;
-            enemy.navMeshAgent = enemyView.navMeshAgent;
-            transformRef.transform = enemyView.transform;
+            health.value = agentView.startHealth;
+            agent.navMeshAgent = agentView.navMeshAgent;
+            transformRef.transform = agentView.transform;
 
-            var playerAnimatorStateReader = enemyView.GetComponent<AgentAnimatorStateReader>();
-            playerAnimatorStateReader.entity = enemyEntity;
+            var playerAnimatorStateReader = agentView.GetComponent<AgentAnimatorStateReader>();
+            playerAnimatorStateReader.entity = agentEntity;
 
-            animatorRef.animator = enemyView.animator;
+            animatorRef.animator = agentView.animator;
 
-            return enemyEntity;
+            return agentEntity;
         }
 
-        private void InitializeWeaponForEnemy(ref EcsEntity enemyEntity, AgentView enemyView)
+        private void InitializeWeaponForAgent(ref EcsEntity agentEntity, AgentView agentView)
         {
-            ref var hasWeapon = ref enemyEntity.Get<HasWeapon>();
+            ref var hasWeapon = ref agentEntity.Get<HasWeapon>();
             var weaponEntity = _world.NewEntity();
             hasWeapon.weapon = weaponEntity;
 
-            var weaponGameObject = Object.Instantiate(_weaponSettings.WeaponPrefab, enemyView.GetComponent<WeaponParent>().Pistol);
+            var weaponGameObject = Object.Instantiate(_weaponSettings.WeaponPrefab, agentView.GetComponent<WeaponParent>().Pistol);
             var weaponView = weaponGameObject.GetComponent<WeaponView>();
 
             ref var weapon = ref weaponEntity.Get<Weapon>();
-            weapon.owner = enemyEntity;
+            weapon.owner = agentEntity;
             weapon.projectilePrefab = _weaponSettings.ProjectilePrefab;
             weapon.projectileRadius = _weaponSettings.ProjectileRadius;
             weapon.projectileSocket = weaponView.ProjectileSocket;
@@ -73,4 +81,5 @@ namespace CodeBase.ECS.System.Agent
             weapon.Cooldown = _weaponSettings.Cooldown;
         }
     }
+
 }

@@ -6,7 +6,7 @@ namespace CodeBase.ECS.System.Agent
 {
     public class AggroTimerSystem : IEcsRunSystem
     {
-        private EcsFilter<AggroTimer,AgentComponent,Follow> _filter;
+        private EcsFilter<AggroTimer,AgentComponent> _filter;
         public void Run()
         {
             UpdateAggroTimers();
@@ -29,7 +29,7 @@ namespace CodeBase.ECS.System.Agent
             ref var agentComponent = ref _filter.Get2(i);
 
             agentComponent.navMeshAgent.enabled = false;
-            entity.Get<TryAggro>();
+            entity.Get<CheckDetectionZone>();
             entity.Get<StopAttack>();
 
             entity.Del<AggroTimer>();

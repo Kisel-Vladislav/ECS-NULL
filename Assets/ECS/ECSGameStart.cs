@@ -104,6 +104,7 @@ namespace CodeBase.ECS
                 .Add(new PlayerRotationSystem())
                 .Add(new AgentFollowSystem())
                 //.Add(new AggroTimerSystem())
+                .Add(new AgentDetectionZoneSystem())
                 .Add(new AgentAggroSystem())
                 .Add(new ProjectileMoveSystem())
                 ;

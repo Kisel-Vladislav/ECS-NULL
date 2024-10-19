@@ -7,5 +7,6 @@ namespace CodeBase.ECS.Data
         public Transform PlayerSpawnPoint;
         public Camera MainCamera;
         public AgentView[] Enemy;
+        public AgentView[] Ally;
     }
 }
