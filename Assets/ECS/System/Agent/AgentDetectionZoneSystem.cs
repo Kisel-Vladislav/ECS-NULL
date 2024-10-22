@@ -56,8 +56,10 @@ namespace CodeBase.ECS.System.Agent
                         break;
                 }
 
+                entity.Destroy();
             }
         }
+
         private static void HandleEnemy(ref DetectionZoneEvent detectionData)
         {
             ref var sourceEntity = ref detectionData.SourceEntity;
