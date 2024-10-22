@@ -3,7 +3,6 @@ using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.WeaponComponent;
 using Leopotam.Ecs;
-using System.Text;
 using UnityEngine;
 
 namespace CodeBase.ECS.System.Agent
@@ -33,7 +32,8 @@ namespace CodeBase.ECS.System.Agent
 
                 if (!attackTarget.Entity.IsAlive())
                 {
-                    StopAimingAndClearTarget(ref entity);
+                    StopAiming(ref entity);
+                    FindNextTarget(ref entity);
                     continue;
                 }
 
@@ -43,20 +43,22 @@ namespace CodeBase.ECS.System.Agent
                     StopAiming(ref entity);
             }
         }
-
         private void StopAttack()
         {
             foreach (var i in _stopAttackFilter)
             {
                 ref var entity = ref _stopAttackFilter.GetEntity(i);
-                StopAimingAndClearTarget(ref entity);
+
+                StopAiming(ref entity);
+                FindNextTarget(ref entity);
+
                 entity.Del<StopAttack>();
             }
         }
-        private void StopAimingAndClearTarget(ref EcsEntity entity)
+        private void FindNextTarget(ref EcsEntity entity)
         {
-            StopAiming(ref entity);
             entity.Del<AttackTarget>();
+            entity.Get<CheckDetectionZone>();
         }
         private void StopAiming(ref EcsEntity entity)
         {
