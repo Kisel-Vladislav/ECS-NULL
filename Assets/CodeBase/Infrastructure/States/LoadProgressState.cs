@@ -17,8 +17,8 @@ namespace CodeBase.Infrastructure.States
         {
             LoadProgressOrInitNew();
 
-            _stateMachine.Enter<LoadLevelState>();
-            //_stateMachine.Enter<LobbyState>();
+            //_stateMachine.Enter<LoadLevelState>();
+            _stateMachine.Enter<LobbyState>();
         }
 
         private void LoadProgressOrInitNew()

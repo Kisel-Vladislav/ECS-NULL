@@ -1,5 +1,4 @@
 ﻿using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.Player;
 
 namespace CodeBase.Infrastructure.States
 {

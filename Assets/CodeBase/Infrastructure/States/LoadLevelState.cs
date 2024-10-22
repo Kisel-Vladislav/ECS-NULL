@@ -23,6 +23,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
+            _uiFactory.Root.ShowCurtain();
             _sceneLoader.Load(SceneName.Game, OnLoaded);
         }
 
@@ -38,7 +39,7 @@ namespace CodeBase.Infrastructure.States
         }
         public void Exit()
         {
-
+            _uiFactory.Root.HideCurtain();
         }
     }
 }

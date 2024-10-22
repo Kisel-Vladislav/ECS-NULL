@@ -4,29 +4,38 @@ namespace CodeBase.UI
 {
     public class UIRoot : MonoBehaviour
     {
-        [SerializeField] GameObject RootWindows;
-        [SerializeField] GameObject RootPopups;
-        [SerializeField] GameObject RootLoadingCurtain;
+        [SerializeField] private GameObject _rootWindows;
+        [SerializeField] private GameObject _rootPopups;
+        [SerializeField] private GameObject _rootLoadingCurtain;
+
+        [SerializeField] private Curtain _curtain;
 
         public void Init()
         {
-            RootWindows = Instantiate(new GameObject($"[{nameof(RootWindows).ToUpper()}]"),transform);
-            RootPopups = Instantiate(new GameObject($"[{nameof(RootPopups).ToUpper()}]"), transform);
-            RootLoadingCurtain = Instantiate(new GameObject($"[{nameof(RootLoadingCurtain).ToUpper()}]"), transform);
+            //_rootWindows = Instantiate(new GameObject($"[{nameof(_rootWindows).ToUpper()}]"),transform);
+            //_rootPopups = Instantiate(new GameObject($"[{nameof(_rootPopups).ToUpper()}]"), transform);
+            //_rootLoadingCurtain = Instantiate(new GameObject($"[{nameof(_rootLoadingCurtain).ToUpper()}]"), transform);
 
             DontDestroyOnLoad(this);
         }
-        public void AddWindow(Transform transform) => transform.SetParent(RootWindows.transform);
-        public void AddPopup(Transform transform) => transform.SetParent(RootPopups.transform);
-        public void AddCurtain(Transform transform) => transform.SetParent(RootLoadingCurtain.transform);
 
+        public void ShowCurtain() => _curtain.Show();
+        public void HideCurtain() => _curtain.Hide();
+
+        public void AddWindow(Transform transform) => transform.SetParent(_rootWindows.transform);
+        public void AddPopup(Transform transform) => transform.SetParent(_rootPopups.transform);
+        public void AddCurtain(Curtain curtain)
+        {
+            curtain.transform.SetParent(_rootLoadingCurtain.transform);
+            _curtain = curtain;
+        }
         public void Clear()
         {
-            for (int i = 0; i < RootWindows.transform.childCount; i++)
-                Destroy(RootWindows.transform.GetChild(i).gameObject);
+            for (int i = 0; i < _rootWindows.transform.childCount; i++)
+                Destroy(_rootWindows.transform.GetChild(i).gameObject);
 
-            for (int i = 0; i < RootPopups.transform.childCount; i++)
-                Destroy(RootPopups.transform.GetChild(i).gameObject);
+            for (int i = 0; i < _rootPopups.transform.childCount; i++)
+                Destroy(_rootPopups.transform.GetChild(i).gameObject);
         }
     }
 }

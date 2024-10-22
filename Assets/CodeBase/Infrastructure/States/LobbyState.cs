@@ -16,12 +16,14 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
+            _uiFactory.Root.ShowCurtain();
             _sceneLoader.Load(SceneName.Lobby, OnLoaded);
         }
 
         private void OnLoaded()
         {
             _uiFactory.CreateLobby();
+            _uiFactory.Root.HideCurtain();
         }
 
         public void Exit()

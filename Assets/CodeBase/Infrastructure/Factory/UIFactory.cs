@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
 using CodeBase.UI;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -9,35 +10,34 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly GameStateMachine _gameStateMachine;
 
+        public UIRoot Root { get; private set; }
         public UIFactory(IAssetProvider assetProvider, GameStateMachine gameStateMachine)
         {
             _assetProvider = assetProvider;
             _gameStateMachine = gameStateMachine;
         }
 
-        private UIRoot _uiRoot;
-
         public void CreateUIRoot()
         {
-            _uiRoot = _assetProvider.Instance<UIRoot>(AssetsPath.UIRoot);
-            _uiRoot.Init();
+            Root = _assetProvider.Instance<UIRoot>(AssetsPath.UIRoot);
+            Root.Init();
         }
         public void CreateLobby()
         {
             var lobby = _assetProvider.Instance<Lobby>(AssetsPath.Lobby);
             lobby.Construct(_gameStateMachine);
-            _uiRoot.AddWindow(lobby.transform);
+            Root.AddWindow(lobby.transform);
         }
         public Hud CreateHud()
         {
             var hud = _assetProvider.Instance<Hud>(AssetsPath.Hud);
-            _uiRoot.AddWindow(hud.transform);
+            Root.AddWindow(hud.transform);
             return hud;
         }
 
         public void Clear()
         {
-            _uiRoot.Clear();
+            Root.Clear();
         }
     }
 }
