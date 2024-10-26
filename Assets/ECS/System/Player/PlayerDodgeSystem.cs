@@ -10,7 +10,7 @@ namespace CodeBase.ECS.System
         private const float DodgeCooldown = 3f;
         private const float DodgeSpeed = 5f;
 
-        private EcsFilter<PlayerMove, Dodging, MoveInput, TransformRef> _dodgingfilter;
+        private EcsFilter<CharacterControllerComponent, Dodging, MoveInput, TransformRef,PlayerTag> _dodgingfilter;
 
         private EcsFilter<TryDodge, AnimatorRef, MoveInput, TransformRef>
             .Exclude<Dodging> _tryDodge;
@@ -60,12 +60,12 @@ namespace CodeBase.ECS.System
             foreach (var i in _dodgingfilter)
             {
                 ref var entity = ref _dodgingfilter.GetEntity(i);
-                ref var playerMove = ref _dodgingfilter.Get1(i);
+                ref var characterController = ref _dodgingfilter.Get1(i);
                 ref var moveInput = ref _dodgingfilter.Get3(i);
                 ref var transformRef = ref _dodgingfilter.Get4(i);
 
                 var dodgeDirection = moveInput.vector.normalized;
-                playerMove.CharacterController.Move(dodgeDirection* DodgeSpeed * Time.deltaTime);
+                characterController.CharacterController.Move(dodgeDirection* DodgeSpeed * Time.deltaTime);
                 ref var blockDodgeDuration = ref _dodgingfilter.GetEntity(i).Get<BlockDodgeDuration>();
                 blockDodgeDuration.Duration = DodgeCooldown;
             }

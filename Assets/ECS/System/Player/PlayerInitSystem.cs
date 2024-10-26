@@ -35,10 +35,13 @@ namespace CodeBase.ECS.PlayerSystem
 
         private void InitializePlayerComponents(EcsEntity playerEntity)
         {
+            playerEntity.Get<PlayerTag>();
+
             ref var player = ref playerEntity.Get<PlayerMove>();
             ref var transformRef = ref playerEntity.Get<TransformRef>();
             ref var health = ref playerEntity.Get<Health>();
             ref var team = ref playerEntity.Get<TeamComponent>();
+            ref var characterController = ref playerEntity.Get<CharacterControllerComponent>();
 
             team.Team = TeamType.Player;
 
@@ -51,7 +54,7 @@ namespace CodeBase.ECS.PlayerSystem
             transformRef.transform = playerGameObject.GetComponent<Transform>();
 
             player.playerSpeed = configuration.PlayerSpeed;
-            player.CharacterController = playerGameObject.GetComponent<CharacterController>();
+            characterController.CharacterController = playerGameObject.GetComponent<CharacterController>();
 
             InitializeAnimator(playerEntity, playerGameObject);
         }
