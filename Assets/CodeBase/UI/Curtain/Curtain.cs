@@ -1,11 +1,16 @@
 using PrimeTween;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Curtain : MonoBehaviour
 {
     [SerializeField] private RectTransform maskRect;
     [SerializeField] private RectTransform imageRect;
+    [SerializeField] private Image image;
     [SerializeField] private float _transitionTime;
+    [SerializeField] private Color _baseColor;
+    [SerializeField] private Color _transitionColor;
     [SerializeField] private bool _rotate;
 
     public RectTransform TransitionCanvas;
@@ -16,26 +21,32 @@ public class Curtain : MonoBehaviour
 
     private void Start()
     {
-        SetupMaxSize();
+        Setup();
     }
 
-    public void Show()
+    public async Task Show()
     {
-        Tween.UISizeDelta(maskRect, Vector3.zero, _transitionTime, Ease.InOutQuad);
+        var tween = Tween.UISizeDelta(maskRect, Vector3.zero, _transitionTime, Ease.InOutQuad)
+            .Group(Tween.Color(image, _baseColor, _transitionTime));
 
         if(_rotate)
-            Tween.Rotation(maskRect, new Vector3(0,0,180), _transitionTime, Ease.InOutQuad);
+            tween.Group(Tween.Rotation(maskRect, new Vector3(0,0,180), _transitionTime, Ease.InOutQuad));
+
+        await tween;
     }
-    public void Hide()
+    public async Task Hide()
     {
         Tween.CompleteAll(maskRect);
-        Tween.UISizeDelta(maskRect, new Vector2(maxSize, maxSize), _transitionTime, Ease.InOutQuad);
+        var tween = Tween.UISizeDelta(maskRect, new Vector2(maxSize, maxSize), _transitionTime, Ease.InOutQuad)
+            .Group(Tween.Color(image, _transitionColor, _transitionTime));
 
         if (_rotate)
-            Tween.Rotation(maskRect,Vector3.zero, _transitionTime, Ease.InOutQuad);
+            tween.Group(Tween.Rotation(maskRect,Vector3.zero, _transitionTime, Ease.InOutQuad));
+
+        await tween;
     }
 
-    public void SetupMaxSize()
+    public void Setup()
     {
         screenWidth = TransitionCanvas.rect.width;
         screenHeight = TransitionCanvas.rect.height;

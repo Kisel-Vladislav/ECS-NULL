@@ -44,6 +44,18 @@ namespace CodeBase.Infrastructure.Installers
             Container.Bind<GameLoopState>()
                      .AsSingle()
                      .NonLazy();
+
+            Container.Bind<GameLoopFailState>()
+                     .AsSingle()
+                     .NonLazy();
+
+            Container.Bind<GameLoopWinState>()
+                     .AsSingle()
+                     .NonLazy();
+
+            Container.Bind<ReplayState>()
+                     .AsSingle()
+                     .NonLazy();
         }
     }
 }

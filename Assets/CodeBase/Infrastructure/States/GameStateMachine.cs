@@ -47,6 +47,9 @@ namespace CodeBase.Infrastructure.States
                 [typeof(LobbyState)] = _stateFactory.CreateState<LobbyState>(),
                 [typeof(LoadLevelState)] = _stateFactory.CreateState<LoadLevelState>(),
                 [typeof(GameLoopState)] = _stateFactory.CreateState<GameLoopState>(),
+                [typeof(GameLoopFailState)] = _stateFactory.CreateState<GameLoopFailState>(),
+                [typeof(GameLoopWinState)] = _stateFactory.CreateState<GameLoopWinState>(),
+                [typeof(ReplayState)] = _stateFactory.CreateState<ReplayState>(),
             };
             Enter<BootstrapState>();
         }

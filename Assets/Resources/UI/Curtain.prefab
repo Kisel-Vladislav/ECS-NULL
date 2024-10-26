@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.17647058, g: 0.5703847, b: 0.7882353, a: 1}
+  m_Color: {r: 0.24313726, g: 0.76862746, b: 0.92941177, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -216,6 +216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maskRect: {fileID: 6364453995965559738}
   imageRect: {fileID: 8235008701549492609}
+  image: {fileID: 3108797738944612422}
   _transitionTime: 0.5
+  _baseColor: {r: 0.3372549, g: 0.7058824, b: 0.83921576, a: 1}
+  _transitionColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   _rotate: 1
   TransitionCanvas: {fileID: 0}

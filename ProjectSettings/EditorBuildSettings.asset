@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 44aac73bd7177b64b92ea35c80054947
+  - enabled: 1
+    path: Assets/Scenes/Dispose.unity
+    guid: 2731dea8348304940a1e046d8f7c78aa
   m_configObjects: {}

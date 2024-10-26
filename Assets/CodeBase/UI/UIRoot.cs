@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.UI
 {
@@ -19,8 +20,8 @@ namespace CodeBase.UI
             DontDestroyOnLoad(this);
         }
 
-        public void ShowCurtain() => _curtain.Show();
-        public void HideCurtain() => _curtain.Hide();
+        public async Task ShowCurtain() =>  await _curtain.Show();
+        public async Task HideCurtain() => await _curtain.Hide();
 
         public void AddWindow(Transform transform) => transform.SetParent(_rootWindows.transform);
         public void AddPopup(Transform transform) => transform.SetParent(_rootPopups.transform);

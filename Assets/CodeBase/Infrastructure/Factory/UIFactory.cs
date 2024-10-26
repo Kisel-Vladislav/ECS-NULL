@@ -1,7 +1,8 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
 using CodeBase.UI;
-using UnityEngine;
+using CodeBase.UI.Window;
+using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -34,10 +35,21 @@ namespace CodeBase.Infrastructure.Factory
             Root.AddWindow(hud.transform);
             return hud;
         }
-
         public void Clear()
         {
             Root.Clear();
+        }
+        public Task<FailWindow.FailWindowResult> ShowFailWindow()
+        {
+            var failWindow = _assetProvider.Instance<FailWindow>(AssetsPath.FailWindow);
+            Root.AddWindow(failWindow.transform);
+            return failWindow.InitAndShow();
+        }
+        public Task<WinWindow.WinWindowResult> ShowWinWindow()
+        {
+            var winWindow = _assetProvider.Instance<WinWindow>(AssetsPath.WinWindow);
+            Root.AddWindow(winWindow.transform);
+            return winWindow.InitAndShow();
         }
     }
 }

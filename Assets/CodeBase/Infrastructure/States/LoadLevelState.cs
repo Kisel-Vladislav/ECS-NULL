@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.SceneManagement;
 using CodeBase.Infrastructure.Services.Level;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -21,9 +22,9 @@ namespace CodeBase.Infrastructure.States
             _uiFactory = uiFactory;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _uiFactory.Root.ShowCurtain();
+            await _uiFactory.Root.ShowCurtain();
             _sceneLoader.Load(SceneName.Game, OnLoaded);
         }
 

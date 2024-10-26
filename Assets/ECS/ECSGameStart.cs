@@ -7,6 +7,7 @@ using CodeBase.ECS.System.Agent;
 using CodeBase.ECS.WeaponComponent;
 using CodeBase.ECS.WeaponSystem;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.States;
 using CodeBase.UI;
 using Leopotam.Ecs;
 using System;
@@ -27,11 +28,13 @@ namespace CodeBase.ECS
         private EcsWorld _world;
         private EcsSystems _systems;
         private Hud _hud;
+        private GameStateMachine _gameStateMachine;
 
         [Inject]
-        public void Construct(IUIFactory uIFactory)
+        public void Construct(IUIFactory uIFactory,GameStateMachine gameStateMachine)
         {
             _hud = uIFactory.CreateHud();
+            _gameStateMachine = gameStateMachine;
         }
         private void Start()
         {
@@ -136,7 +139,8 @@ namespace CodeBase.ECS
                     .Inject(SceneData)
                     .Inject(_runtimeData)
                     .Inject(WeaponSettings)
-                    .Inject(_hud);
+                    .Inject(_hud)
+                    .Inject(_gameStateMachine)
                     ;
         }
 

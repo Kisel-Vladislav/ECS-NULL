@@ -14,9 +14,9 @@ namespace CodeBase.Infrastructure.States
             _sceneLoader = sceneLoader;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _uiFactory.Root.ShowCurtain();
+            await _uiFactory.Root.ShowCurtain();
             _sceneLoader.Load(SceneName.Lobby, OnLoaded);
         }
 
