@@ -1,11 +1,15 @@
 ﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 using UnityEngine;
+
 namespace CodeBase.ECS.System
 {
     public class GravitySystem : IEcsRunSystem
     {
-        private EcsFilter<CharacterControllerComponent> _filter;
+        private EcsFilter<CharacterControllerComponent>
+            .Exclude<AgentComponent> _filter;
+
         public void Run()
         {
             foreach (var i in _filter)

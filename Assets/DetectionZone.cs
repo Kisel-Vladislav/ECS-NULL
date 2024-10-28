@@ -2,7 +2,7 @@ using CodeBase.ECS.Component.Agent;
 using Leopotam.Ecs;
 using UnityEngine;
 
-public class Aggro : MonoBehaviour
+public class DetectionZone : MonoBehaviour
 {
     private bool _hasAggroTarget;
     public EcsEntity entity;
@@ -10,7 +10,6 @@ public class Aggro : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ref var aggro = ref entity.Get<CheckDetectionZone>();
-        //aggro.target = other.transform;
     }
     private void OnTriggerExit(Collider other)
     {

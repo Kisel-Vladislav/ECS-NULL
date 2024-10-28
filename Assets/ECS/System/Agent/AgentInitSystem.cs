@@ -34,7 +34,7 @@ namespace CodeBase.ECS.System.Agent
         {
             var agentEntity = _world.NewEntity();
 
-            var aggro = agentView.GetComponentInChildren<Aggro>();
+            var aggro = agentView.GetComponentInChildren<DetectionZone>();
             aggro.entity = agentEntity;
 
             ref var agent = ref agentEntity.Get<AgentComponent>();
@@ -42,7 +42,9 @@ namespace CodeBase.ECS.System.Agent
             ref var animatorRef = ref agentEntity.Get<AnimatorRef>();
             ref var transformRef = ref agentEntity.Get<TransformRef>();
             ref var team = ref agentEntity.Get<TeamComponent>();
+            ref var characterController = ref agentEntity.Get<CharacterControllerComponent>();
 
+            
             team.Team = teamType;
 
             agentView.EntityView.Entity = agentEntity;
@@ -50,6 +52,7 @@ namespace CodeBase.ECS.System.Agent
             health.value = agentView.startHealth;
             agent.navMeshAgent = agentView.navMeshAgent;
             transformRef.transform = agentView.transform;
+            characterController.CharacterController = agentView.CharacterController;
 
             var playerAnimatorStateReader = agentView.GetComponent<AgentAnimatorStateReader>();
             playerAnimatorStateReader.entity = agentEntity;
