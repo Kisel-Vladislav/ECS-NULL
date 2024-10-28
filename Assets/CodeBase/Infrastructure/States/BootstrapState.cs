@@ -2,6 +2,8 @@
 using CodeBase.Infrastructure.SceneManagement;
 using CodeBase.Infrastructure.Services.Audio;
 using CodeBase.Infrastructure.StaticData;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -24,13 +26,13 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
+            Debug.Log("Enter Boot");
             InitializeServices();
             _uiFactory.CreateUIRoot();
             _stateMachine.Enter<LoadProgressState>();
         }
-        public void Exit()
-        {
-        }
+        public Task Exit() =>
+            Task.CompletedTask;
 
         private void InitializeServices()
         {

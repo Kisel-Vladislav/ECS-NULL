@@ -38,9 +38,9 @@ namespace CodeBase.Infrastructure.States
         {
             //_playerFactory.Create(_levelService.WordObjectCollector.SpawnPoint.position,Quaternion.identity);
         }
-        public void Exit()
+        public async Task Exit()
         {
-            _uiFactory.Root.HideCurtain();
+            await _uiFactory.Root.HideCurtain();
         }
     }
 }

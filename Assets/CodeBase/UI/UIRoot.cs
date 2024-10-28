@@ -10,7 +10,7 @@ namespace CodeBase.UI
         [SerializeField] private GameObject _rootLoadingCurtain;
 
         [SerializeField] private Curtain _curtain;
-
+        
         public void Init()
         {
             //_rootWindows = Instantiate(new GameObject($"[{nameof(_rootWindows).ToUpper()}]"),transform);

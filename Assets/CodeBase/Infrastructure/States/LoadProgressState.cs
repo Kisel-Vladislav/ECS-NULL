@@ -1,4 +1,6 @@
 ﻿using CodeBase.Player.Data;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -16,7 +18,7 @@ namespace CodeBase.Infrastructure.States
         public void Enter()
         {
             LoadProgressOrInitNew();
-
+            Debug.Log("Enter LoadProgress");
             //_stateMachine.Enter<LoadLevelState>();
             _stateMachine.Enter<LobbyState>();
         }
@@ -31,8 +33,7 @@ namespace CodeBase.Infrastructure.States
             return null;
         }
 
-        public void Exit()
-        {
-        }
+        public Task Exit() =>
+            Task.CompletedTask;
     }
 }

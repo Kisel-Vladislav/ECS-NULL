@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.SceneManagement;
+using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -26,8 +27,9 @@ namespace CodeBase.Infrastructure.States
             _uiFactory.Root.HideCurtain();
         }
 
-        public void Exit()
+        public async Task Exit()
         {
+            await _uiFactory.Root.ShowCurtain();
             _uiFactory.Clear();
         }
     }

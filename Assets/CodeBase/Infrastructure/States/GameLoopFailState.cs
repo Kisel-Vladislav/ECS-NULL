@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
+using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -27,8 +28,7 @@ namespace CodeBase.Infrastructure.States
                     break;
             }
         }
-        public void Exit()
-        {
-        }
+        public Task Exit() =>
+            Task.CompletedTask;
     }
 }

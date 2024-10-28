@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Zenject;
 
 namespace CodeBase.Infrastructure.States
@@ -17,22 +18,24 @@ namespace CodeBase.Infrastructure.States
             _stateFactory = stateFactory;
         }
 
-        public void Enter<TState>() where TState : class, IState
+        public async void Enter<TState>() where TState : class, IState
         {
-            var state = ChangeState<TState>();
+            var state = await ChangeState<TState>();
             state.Enter();
         }
-        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
+        public async void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            var state = ChangeState<TState>();
+            var state = await ChangeState<TState>();
             state.Enter(payload);
         }
 
         private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
-        private TState ChangeState<TState>() where TState : class, IExitableState
+        private async Task<TState> ChangeState<TState>() where TState : class, IExitableState
         {
-            _activeState?.Exit();
+            if(_activeState != null)
+                await _activeState.Exit();
+
             var state = GetState<TState>();
             _activeState = state;
             return state;

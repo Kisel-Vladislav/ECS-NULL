@@ -19,6 +19,8 @@ public class Curtain : MonoBehaviour
     private float screenHeight;
     private float maxSize;
 
+    private bool _isShow = true;
+
     private void Start()
     {
         Setup();
@@ -26,16 +28,23 @@ public class Curtain : MonoBehaviour
 
     public async Task Show()
     {
+        if (_isShow)
+            return;
+
         var tween = Tween.UISizeDelta(maskRect, Vector3.zero, _transitionTime, Ease.InOutQuad)
             .Group(Tween.Color(image, _baseColor, _transitionTime));
 
         if(_rotate)
             tween.Group(Tween.Rotation(maskRect, new Vector3(0,0,180), _transitionTime, Ease.InOutQuad));
 
+        _isShow = true;
         await tween;
     }
     public async Task Hide()
     {
+        if (!_isShow)
+            return;
+
         Tween.CompleteAll(maskRect);
         var tween = Tween.UISizeDelta(maskRect, new Vector2(maxSize, maxSize), _transitionTime, Ease.InOutQuad)
             .Group(Tween.Color(image, _transitionColor, _transitionTime));
@@ -43,6 +52,7 @@ public class Curtain : MonoBehaviour
         if (_rotate)
             tween.Group(Tween.Rotation(maskRect,Vector3.zero, _transitionTime, Ease.InOutQuad));
 
+        _isShow = false;
         await tween;
     }
 

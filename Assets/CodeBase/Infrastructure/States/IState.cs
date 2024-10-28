@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Infrastructure.States
+﻿using System.Threading.Tasks;
+
+namespace CodeBase.Infrastructure.States
 {
     public interface IState : IExitableState
     {
@@ -6,7 +8,7 @@
     }
     public interface IExitableState
     {
-        void Exit();
+        Task Exit();
     }
     public interface IPayloadedState<Tpayload> : IExitableState
     {
