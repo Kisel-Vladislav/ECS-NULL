@@ -10,7 +10,6 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.UI;
 using Leopotam.Ecs;
-using System;
 using UnityEngine;
 using Voody.UniLeo;
 using Zenject;
@@ -29,12 +28,16 @@ namespace CodeBase.ECS
         private EcsSystems _systems;
         private Hud _hud;
         private GameStateMachine _gameStateMachine;
+        private IEntityViewFactory _entityViewFactory;
+        private IEntityFactory _entityFactory;
 
         [Inject]
-        public void Construct(IUIFactory uIFactory,GameStateMachine gameStateMachine)
+        public void Construct(IUIFactory uIFactory, GameStateMachine gameStateMachine, IEntityViewFactory entityViewFactory, IEntityFactory entityFactory)
         {
             _hud = uIFactory.CreateHud();
             _gameStateMachine = gameStateMachine;
+            _entityViewFactory = entityViewFactory;
+            _entityFactory = entityFactory;
         }
         private void Start()
         {
@@ -52,6 +55,8 @@ namespace CodeBase.ECS
 
             _systems.ConvertScene();
             _runtimeData = new RuntimeData();
+
+            _entityFactory.World = _world;
 
             AddInitSystems();
             AddInputSystems();
@@ -141,6 +146,8 @@ namespace CodeBase.ECS
                     .Inject(WeaponSettings)
                     .Inject(_hud)
                     .Inject(_gameStateMachine)
+                    .Inject(_entityFactory)
+                    .Inject(_entityViewFactory)
                     ;
         }
 

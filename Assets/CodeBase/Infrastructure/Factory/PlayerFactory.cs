@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.Player;
+using CodeBase.Infrastructure.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
@@ -8,16 +9,18 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IPlayerProvider _playerProvider;
-
-        public PlayerFactory(IAssetProvider assetProvider, IPlayerProvider playerProvider)
+        private readonly IStaticDataService _staticDataService;
+        public PlayerFactory(IAssetProvider assetProvider, IPlayerProvider playerProvider, IStaticDataService staticDataService)
         {
             _assetProvider = assetProvider;
             _playerProvider = playerProvider;
+            _staticDataService = staticDataService;
         }
 
         public GameObject Create(Vector3 at, Quaternion rotation)
         {
-            var player = _assetProvider.Instance<GameObject>(AssetsPath.Player,at,rotation);
+            var playerStaticData = _staticDataService.ForPlayer();
+            var player = _assetProvider.Instance(playerStaticData.Prefab,at,rotation);
             _playerProvider.Player = player;
             return player;
         }

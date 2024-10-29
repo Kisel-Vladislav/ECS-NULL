@@ -49,6 +49,8 @@ namespace CodeBase.Infrastructure.Installers
         {
             BindingPlayerFactory();
             BindingUIFactory();
+            BindingEntityFactory();
+            BindingEntityViewFactory();
         }
         private void BindingPersistentProgress() =>
             Container.Bind<PersistentProgress>()
@@ -57,6 +59,16 @@ namespace CodeBase.Infrastructure.Installers
         private void BindingLevelService() =>
             Container.Bind<ILevelService>()
                 .To<LevelService>()
+                .AsSingle()
+                .NonLazy();
+        private void BindingEntityViewFactory() =>
+            Container.Bind<IEntityViewFactory>()
+                .To<EntityViewFactory>()
+                .AsSingle()
+                .NonLazy();
+        private void BindingEntityFactory() =>
+            Container.Bind<IEntityFactory>()
+                .To<EntityFactory>()
                 .AsSingle()
                 .NonLazy();
         private void BindingUIFactory() =>

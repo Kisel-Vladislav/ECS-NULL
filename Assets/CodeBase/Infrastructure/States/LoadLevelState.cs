@@ -13,13 +13,17 @@ namespace CodeBase.Infrastructure.States
         private readonly IUIFactory _uiFactory;
         private IPlayerFactory _playerFactory;
         private ILevelService _levelService;
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelService levelService, IPlayerFactory playerFactory, IUIFactory uiFactory)
+        private IEntityFactory _entityFactory;
+        private IEntityViewFactory _entityViewFactory;
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelService levelService, IPlayerFactory playerFactory, IUIFactory uiFactory, IEntityFactory entityFactory, IEntityViewFactory entityViewFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _levelService = levelService;
             _playerFactory = playerFactory;
             _uiFactory = uiFactory;
+            _entityFactory = entityFactory;
+            _entityViewFactory = entityViewFactory;
         }
 
         public async void Enter()
@@ -36,6 +40,11 @@ namespace CodeBase.Infrastructure.States
         }
         private void InitGameWorld()
         {
+            //var player =  _entityFactory.CreatePlayer();
+            //_entityViewFactory.CreatePlayer(player,_levelService.WordObjectCollector.SpawnPoint.position,Quaternion.identity);
+
+            //var weapon = _entityFactory.SetupWeapon(player);
+            //_entityViewFactory.SetupWeapon(weapon);
             //_playerFactory.Create(_levelService.WordObjectCollector.SpawnPoint.position,Quaternion.identity);
         }
         public async Task Exit()

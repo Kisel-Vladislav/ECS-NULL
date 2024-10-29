@@ -18,7 +18,6 @@ namespace CodeBase.Infrastructure.States
         public void Enter()
         {
             LoadProgressOrInitNew();
-            Debug.Log("Enter LoadProgress");
             //_stateMachine.Enter<LoadLevelState>();
             _stateMachine.Enter<LobbyState>();
         }

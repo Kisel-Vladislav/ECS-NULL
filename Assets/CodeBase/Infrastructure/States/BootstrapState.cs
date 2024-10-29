@@ -26,7 +26,6 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
-            Debug.Log("Enter Boot");
             InitializeServices();
             _uiFactory.CreateUIRoot();
             _stateMachine.Enter<LoadProgressState>();
@@ -41,6 +40,8 @@ namespace CodeBase.Infrastructure.States
         }
         private void InitStaticData()
         {
+            _staticDataService.LoadPlayer();
+            _staticDataService.LoadWeapon();
         }
 
     }
