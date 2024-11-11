@@ -1,4 +1,5 @@
-﻿using CodeBase.ECS.Data;
+﻿using CodeBase.ECS.Component.Agent;
+using CodeBase.ECS.Data;
 
 namespace CodeBase.Infrastructure.StaticData
 {
@@ -9,5 +10,8 @@ namespace CodeBase.Infrastructure.StaticData
 
         public void LoadWeapon();
         WeaponSettings ForWeapon();
+
+        public void LoadAgents();
+        AgentStaticData ForAgent(TeamType teamType);
     }
 }

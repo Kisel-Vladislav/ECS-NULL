@@ -57,6 +57,21 @@ namespace CodeBase.Infrastructure.Factory
 
             return weapon;
         }
+
+        public EcsEntity CreateAgent(TeamType teamType)
+        {
+            var agentEntity = World.NewEntity();
+
+            ref var health = ref agentEntity.Get<Health>();
+            ref var team = ref agentEntity.Get<TeamComponent>();
+
+            team.Team = teamType;
+
+            var agentStaticData = _staticDataService.ForAgent(teamType);
+            health.value = agentStaticData.Hp;
+
+            return agentEntity;
+        }
     }
 }
 

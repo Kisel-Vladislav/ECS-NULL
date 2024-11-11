@@ -1,4 +1,5 @@
 ﻿using CodeBase.ECS.Component;
+using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.System;
 using CodeBase.ECS.WeaponComponent;
 using CodeBase.Infrastructure.AssetManagement;
@@ -41,12 +42,12 @@ namespace CodeBase.Infrastructure.Factory
 
             return playerView;
         }
-        private void InitializeAnimator(ref EcsEntity playerEntity, GameObject playerGameObject)
+        private void InitializeAnimator(ref EcsEntity player, GameObject playerGameObject)
         {
             var playerAnimatorStateReader = playerGameObject.GetComponent<AgentAnimatorStateReader>();
-            playerAnimatorStateReader.entity = playerEntity;
+            playerAnimatorStateReader.entity = player;
 
-            ref var animatorRef = ref playerEntity.Get<AnimatorRef>();
+            ref var animatorRef = ref player.Get<AnimatorRef>();
             animatorRef.animator = playerGameObject.GetComponent<Animator>();
         }
         public GameObject SetupWeapon(ref EcsEntity owner)
@@ -65,6 +66,34 @@ namespace CodeBase.Infrastructure.Factory
             weaponData.projectileSocket = weaponViewComponent.ProjectileSocket;
 
             return weaponView;
+        }
+
+        public GameObject CreateAgentView(ref EcsEntity agent, AgentView agentView)
+        {
+            ref var transformRef = ref agent.Get<TransformRef>();
+            transformRef.transform = agentView.transform;
+
+            ref var characterController = ref agent.Get<CharacterControllerComponent>();
+            characterController.CharacterController = agentView.CharacterController;
+
+            ref var weaponAttachmentPoint = ref agent.Get<WeaponAttachmentPoint>();
+            weaponAttachmentPoint.attachmentTransform = agentView.GetComponent<WeaponParent>().Pistol;
+
+            ref var animatorRef = ref agent.Get<AnimatorRef>();
+            animatorRef.animator = agentView.animator;
+
+            var entityView = agentView.GetComponent<EntityView>();
+            entityView.Entity = agent;
+
+            ref var agentComponent = ref agent.Get<AgentComponent>();
+            agentComponent.navMeshAgent = agentView.navMeshAgent;
+
+            var aggro = agentView.GetComponentInChildren<DetectionZone>();
+            aggro.entity = agent;
+
+            InitializeAnimator(ref agent, agentView.gameObject);
+
+            return agentView.gameObject;
         }
     }
 }
