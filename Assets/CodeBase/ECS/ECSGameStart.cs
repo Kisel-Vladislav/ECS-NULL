@@ -41,7 +41,7 @@ namespace CodeBase.ECS
         }
         private void Start()
         {
-            
+
             _world = new EcsWorld();
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
