@@ -6,6 +6,12 @@ namespace CodeBase.Grid
     {
         private const int X = 100;
         private const int Z = 100;
+
+        private class Build
+        {
+            public GameObject GameObject;
+        }
+
         private int _cellSize = 2;
         private Grid<Build> _grid;
         [SerializeField] Material _gridMaterial;
@@ -23,9 +29,5 @@ namespace CodeBase.Grid
         }
         public Vector3 GetWorldPosition(Vector3 position) =>
             _grid.GetWorldPosition(position);
-        private class Build
-        {
-            public GameObject GameObject;
-        }
     }
 }
