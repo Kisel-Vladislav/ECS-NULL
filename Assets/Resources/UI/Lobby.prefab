@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4e5398fc0acef4bb5d326d12af0d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetState: 0
+  targetState: 1
   _button: {fileID: 2722854010074468349}
 --- !u!1 &6994082025185470300
 GameObject:
@@ -1548,6 +1548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayButton: {fileID: 1467479700017638673}
+  LevelEditorButton: {fileID: 8145518784589431834}
 --- !u!1 &7760734441305604919
 GameObject:
   m_ObjectHideFlags: 0

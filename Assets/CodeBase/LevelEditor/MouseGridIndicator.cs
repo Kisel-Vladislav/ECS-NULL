@@ -17,10 +17,7 @@ namespace CodeBase.LevelEditor
         {
             _raycastService = raycastService;
         }
-        private void Awake()
-        {
-            _raycastService = new RaycastService();
-        }
+
         private void Update()
         {
             RaycastHit? hitt = _raycastService.GetMouseRaycastHit();
