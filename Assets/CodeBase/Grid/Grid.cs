@@ -16,6 +16,10 @@ namespace CodeBase.Grid
                 X = x;
                 Z = z;
             }
+            public override string ToString()
+            {
+                return $"GridTile (X: {X}, Z: {Z}, Value: {Value?.ToString() ?? "null"})";
+            }
         }
 
         private GridTile[,] _grid;

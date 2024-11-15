@@ -4,5 +4,6 @@
     {
         float X { get; }
         bool IsAttacking();
+        bool IsPointerDown();
     }
 }

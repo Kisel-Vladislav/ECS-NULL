@@ -20,10 +20,10 @@ namespace CodeBase.LevelEditor
 
         private void Update()
         {
-            RaycastHit? hitt = _raycastService.GetMouseRaycastHit();
-            if (hitt != null)
+            RaycastHit? hit = _raycastService.GetMouseRaycastHit();
+            if (hit != null)
             {
-                var pos = _grid.GetWorldPosition(hitt.Value.point);
+                var pos = _grid.GetWorldPosition(hit.Value.point);
                 GridIndicator.transform.position = pos;
             }
         }
