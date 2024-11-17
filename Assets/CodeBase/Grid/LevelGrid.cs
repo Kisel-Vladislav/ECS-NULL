@@ -29,16 +29,12 @@ namespace CodeBase.Grid
 
         public Vector3 GetWorldPosition(Vector3 position)
         {
-            var grid = GetGridForPosition(position);
-            if (grid == null)
-                return Vector3.zero;
-
             float levelYOffset = RoundedToLevelIndex(position) * CellSize;
-            return grid.GetWorldPosition(position).AddY(levelYOffset);
+            return _levels[0].GetWorldPosition(position).AddY(levelYOffset);
         }
         public void PlaceBuild(Vector3 position, Build build)
         {
-            var grid = GetGridForPosition(position);
+            var grid = GetGridForBuilding(position);
             if (grid == null)
                 return;
 
@@ -52,6 +48,19 @@ namespace CodeBase.Grid
             {
                 GameObject = Instantiate(build.prefab, worldPosition, Quaternion.identity, transform)
             };
+        }
+        public void DestroyBlock(Vector3 position)
+        {
+            var grid = GetGridForDestruction(position);
+            if (grid == null)
+                return;
+
+            var cell = grid.Get(position);
+            if (cell == null || IsCellEmpty(cell))
+                return;
+
+            Destroy(cell.Value.GameObject);
+            cell.Value = null;
         }
 
         private void InitGridLevels()
@@ -75,9 +84,16 @@ namespace CodeBase.Grid
 
             plane.GetComponent<Renderer>().material = _gridMaterial;
         }
-        private Grid<BuildCell> GetGridForPosition(Vector3 position)
+        private Grid<BuildCell> GetGridForBuilding(Vector3 position)
         {
             int levelIndex = RoundedToLevelIndex(position);
+            return IsLevelIndexValid(levelIndex) ? _levels[levelIndex] : null;
+        }
+        private Grid<BuildCell> GetGridForDestruction(Vector3 position)
+        {
+            int levelIndex = Mathf.FloorToInt(position.y / CellSize);
+            levelIndex = Mathf.Max(levelIndex, 0);
+
             return IsLevelIndexValid(levelIndex) ? _levels[levelIndex] : null;
         }
         private int RoundedToLevelIndex(Vector3 position) => 
