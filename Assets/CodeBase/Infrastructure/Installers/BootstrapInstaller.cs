@@ -13,7 +13,7 @@ using Zenject;
 
 namespace CodeBase.Infrastructure.Installers
 {
-    public class BootstrapInstaller : MonoInstaller, ICoroutineRunner
+    public class BootstrapInstaller : MonoInstaller, ICoroutineRunner, IInitializable
     {
         public override void InstallBindings()
         {
@@ -124,5 +124,10 @@ namespace CodeBase.Infrastructure.Installers
                      .To<AssetProvider>()
                      .AsSingle()
                      .NonLazy();
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

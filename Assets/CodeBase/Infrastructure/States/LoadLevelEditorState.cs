@@ -23,6 +23,7 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
+            _uiFactory.CreateLevelEditorHud();
             _uiFactory.Root.HideCurtain();
         }
 

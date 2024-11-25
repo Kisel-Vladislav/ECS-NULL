@@ -1,4 +1,4 @@
-﻿using Assets;
+﻿using CodeBase.Infrastructure.Data;
 using CodeBase.Infrastructure.StaticData;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +7,8 @@ namespace CodeBase.Grid
 {
     public class LevelGrid : MonoBehaviour
     {
-        private const int X = 50;
-        private const int Z = 50;
+        private const int X = 100;
+        private const int Z = 100;
         private const int GridLevels = 3;
         private const int CellSize = 2;
 
