@@ -17,5 +17,7 @@ namespace CodeBase.Infrastructure.StaticData
 
         public void LoadBuildsView();
         List<BuildPanelItemData> ForBuilds(BuildGroupType buildGroupType);
+        Build ForBuild(BuildTypeId buildTypeid);
+        void LoadBuilds();
     }
 }

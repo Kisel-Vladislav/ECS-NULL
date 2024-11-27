@@ -8,11 +8,13 @@ namespace CodeBase.Infrastructure.States
     {
         private readonly IUIFactory _uiFactory;
         private readonly SceneLoader _sceneLoader;
+        private readonly GameStateMachine _stateMachine;
 
-        public LoadLevelEditorState(IUIFactory uiFactory, SceneLoader sceneLoader)
+        public LoadLevelEditorState(IUIFactory uiFactory, SceneLoader sceneLoader, GameStateMachine stateMachine)
         {
             _uiFactory = uiFactory;
             _sceneLoader = sceneLoader;
+            _stateMachine = stateMachine;
         }
 
         public async void Enter()
@@ -25,6 +27,8 @@ namespace CodeBase.Infrastructure.States
         {
             _uiFactory.CreateLevelEditorHud();
             _uiFactory.Root.HideCurtain();
+
+            _stateMachine.Enter<LevelEditorLoop>();
         }
 
         public Task Exit() =>

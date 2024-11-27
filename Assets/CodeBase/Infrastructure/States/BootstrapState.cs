@@ -44,6 +44,7 @@ namespace CodeBase.Infrastructure.States
             _staticDataService.LoadWeapon();
             _staticDataService.LoadAgents();
             _staticDataService.LoadBuildsView();
+            _staticDataService.LoadBuilds();
         }
 
     }

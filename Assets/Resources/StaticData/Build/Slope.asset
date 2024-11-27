@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba7c208b7b6e1d489cf8205cc54d462, type: 3}
   m_Name: Slope
   m_EditorClassIdentifier: 
+  BuildTypeId: 0
   prefab: {fileID: 919132149155446097, guid: 740ee303285353541ab0bf922f1afd64, type: 3}
   buildName: 

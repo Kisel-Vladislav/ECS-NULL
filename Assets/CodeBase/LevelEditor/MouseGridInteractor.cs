@@ -3,11 +3,10 @@ using CodeBase.Infrastructure.Service.InputService;
 using CodeBase.Infrastructure.Services.Raycast;
 using CodeBase.Infrastructure.StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.LevelEditor
 {
-    public class MouseGridInteractor : MonoBehaviour
+    public class MouseGridInteractor
     {
         private IRaycastService _raycastService;
         private IInputService _inputService;
@@ -15,23 +14,17 @@ namespace CodeBase.LevelEditor
         public LevelGrid _grid;
         public bool _isDestroyMode;
 
-        [Inject]
-        public void Construct(IRaycastService raycastService, IInputService inputService)
+        public MouseGridInteractor(IInputService inputService)
         {
-            _raycastService = raycastService;
             _inputService = inputService;
         }
 
-        private void Update()
+        public void Update(Vector3 position)
         {
             if (!_inputService.IsPointerDown())
                 return;
 
-            var hit = _raycastService.GetMouseRaycastHit();
-            if (hit == null)
-                return;
-
-            Interact(hit.Value.point);
+            Interact(position);
         }
 
         private void Interact(Vector3 point)

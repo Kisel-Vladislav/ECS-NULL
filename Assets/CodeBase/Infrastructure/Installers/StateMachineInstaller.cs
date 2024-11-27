@@ -41,6 +41,10 @@ namespace CodeBase.Infrastructure.Installers
                      .AsSingle()
                      .NonLazy();
 
+            Container.BindInterfacesAndSelfTo<LevelEditorLoop>()
+                     .AsSingle()
+                     .NonLazy();
+
             Container.Bind<LoadLevelState>()
                      .AsSingle()
                      .NonLazy();

@@ -16,6 +16,8 @@ namespace CodeBase.UI
         private List<BuildPanelItemView> _content = new();
         private BuildPanelItemView _previewedItem;
 
+        public event Action<BuildTypeId> OnChangePreview;
+
         public void Construct(BuildItemViewFactory itemViewFactory, IStaticDataService staticDataService)
         {
             _itemViewFactory = itemViewFactory;
@@ -54,6 +56,8 @@ namespace CodeBase.UI
 
             view.Select();
             _previewedItem = view;
+
+            OnChangePreview?.Invoke(view.BuildId);
         }
 
         internal void Construct(BuildItemViewFactory buildItemViewFactory, object staticDataService)
