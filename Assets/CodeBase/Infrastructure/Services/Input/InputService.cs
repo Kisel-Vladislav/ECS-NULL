@@ -6,5 +6,6 @@
 
         public abstract float X { get; }
         public abstract bool IsAttacking();
+        public abstract bool IsPointerDown();
     }
 }

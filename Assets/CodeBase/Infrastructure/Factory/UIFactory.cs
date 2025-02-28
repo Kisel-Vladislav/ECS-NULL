@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
+using CodeBase.Infrastructure.StaticData;
 using CodeBase.UI;
 using CodeBase.UI.Window;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly IStaticDataService _staticDataService;
 
         public UIRoot Root { get; private set; }
-        public UIFactory(IAssetProvider assetProvider, GameStateMachine gameStateMachine)
+        public UIFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, GameStateMachine gameStateMachine)
         {
             _assetProvider = assetProvider;
+            _staticDataService = staticDataService;
             _gameStateMachine = gameStateMachine;
         }
 
@@ -35,6 +38,12 @@ namespace CodeBase.Infrastructure.Factory
             Root.AddWindow(hud.transform);
             return hud;
         }
+        public void CreateLevelEditorHud()
+        {
+            var hud = _assetProvider.Instance<LevelEditorHud>(AssetsPath.LevelEditorHud);
+            hud.BuildPanelContentController.Construct(new BuildItemViewFactory(_assetProvider), _staticDataService);
+            Root.AddWindow(hud.transform);
+        }
         public void Clear()
         {
             Root.Clear();
@@ -51,5 +60,6 @@ namespace CodeBase.Infrastructure.Factory
             Root.AddWindow(winWindow.transform);
             return winWindow.InitAndShow();
         }
+
     }
 }

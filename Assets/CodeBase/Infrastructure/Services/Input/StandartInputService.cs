@@ -8,6 +8,8 @@ namespace CodeBase.Infrastructure.Service.InputService
             UnityAxis();
         public override bool IsAttacking() =>
             UnityAttackButtonPress();
+        public override bool IsPointerDown() =>
+            Input.GetMouseButtonDown(0);
 
         private float UnityAxis() =>
             Input.GetAxis(HORIZONTAL);

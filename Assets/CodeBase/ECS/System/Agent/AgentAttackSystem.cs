@@ -1,7 +1,7 @@
-﻿using Assets;
-using CodeBase.ECS.Component;
+﻿using CodeBase.ECS.Component;
 using CodeBase.ECS.Component.Agent;
 using CodeBase.ECS.WeaponComponent;
+using CodeBase.Infrastructure.Data;
 using Leopotam.Ecs;
 using UnityEngine;
 

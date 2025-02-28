@@ -9,5 +9,7 @@
         public const string Curtain = "UI/Curtain";
         public const string FailWindow = "UI/FailWindow";
         public const string WinWindow = "UI/WinWindow";
+        public const string BuildPanelItemView = "UI/BuildItemView";
+        public const string LevelEditorHud = "UI/LevelEditorHud";
     }
 }

@@ -12,14 +12,26 @@ namespace CodeBase.Infrastructure.StaticData
 
         private PlayerStaticData _player;
         private WeaponSettings _weapon;
+        private List<BuildPanelItemData> _buildsView;
+        private Dictionary<BuildTypeId,Build> _builds;
+
 
         public AgentStaticData ForAgent(TeamType teamType) => _agents[teamType];
+
+        public Build ForBuild(BuildTypeId buildTypeid) => _builds[buildTypeid];
+
+        public List<BuildPanelItemData> ForBuilds(BuildGroupType buildGroupType) => 
+            _buildsView.Where(x => x.BuildGroupType == buildGroupType)
+                       .ToList();
         public PlayerStaticData ForPlayer() => _player;
         public WeaponSettings ForWeapon() => _weapon;
 
-
         public void LoadAgents() => _agents = Resources.LoadAll<AgentStaticData>("StaticData/Agent")
                                                        .ToDictionary(x => x.Team, x => x);
+        public void LoadBuildsView() => _buildsView = Resources.LoadAll<BuildPanelItemData>("StaticData/Build")
+                                                               .ToList();
+        public void LoadBuilds() => _builds = Resources.LoadAll<Build>("StaticData/Build")
+                                                          .ToDictionary(x => x.BuildTypeId, x => x);
         public void LoadPlayer() => _player = Resources.Load<PlayerStaticData>("StaticData/Player/PlayerData");
         public void LoadWeapon() => _weapon = Resources.Load<WeaponSettings>("StaticData/Weapon/Pistol");
     }

@@ -6,13 +6,14 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Audio;
 using CodeBase.Infrastructure.Services.Level;
 using CodeBase.Infrastructure.Services.Player;
+using CodeBase.Infrastructure.Services.Raycast;
 using CodeBase.Infrastructure.StaticData;
 using CodeBase.Player.Data;
 using Zenject;
 
 namespace CodeBase.Infrastructure.Installers
 {
-    public class BootstrapInstaller : MonoInstaller, ICoroutineRunner
+    public class BootstrapInstaller : MonoInstaller, ICoroutineRunner, IInitializable
     {
         public override void InstallBindings()
         {
@@ -33,6 +34,7 @@ namespace CodeBase.Infrastructure.Installers
             BindingPauseService();
             BindingLevelService();
             BindingAudioService();
+            BindingRayCastService();
         }
         private void BindingAssetManagementService()
         {
@@ -102,6 +104,11 @@ namespace CodeBase.Infrastructure.Installers
                      .To<AudioService>()
                      .AsSingle()
                      .NonLazy();
+        private void BindingRayCastService() =>
+            Container.Bind<IRaycastService>()
+                     .To<RaycastService>()
+                     .AsSingle()
+                     .NonLazy();
         private void BindingInputService() =>
             Container.Bind<IInputService>()
                      .To<StandartInputService>()
@@ -117,5 +124,10 @@ namespace CodeBase.Infrastructure.Installers
                      .To<AssetProvider>()
                      .AsSingle()
                      .NonLazy();
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -29,6 +29,8 @@ namespace CodeBase.UI
                     _gameStateMachine.Enter<LoadLevelState>(); break;
                 case TargetState.LobbyState:
                     _gameStateMachine.Enter<LobbyState>(); break;
+                case TargetState.LoadLeveLEditorState:
+                    _gameStateMachine.Enter<LoadLevelEditorState>(); break;
                 default:
                     throw new System.ArgumentOutOfRangeException(nameof(targetState), targetState, "Unhandled target state.");
             }

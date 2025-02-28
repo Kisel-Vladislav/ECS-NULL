@@ -11,6 +11,7 @@ namespace CodeBase.Infrastructure.Factory
 
         void Clear();
         Hud CreateHud();
+        void CreateLevelEditorHud();
         void CreateLobby();
         void CreateUIRoot();
 
