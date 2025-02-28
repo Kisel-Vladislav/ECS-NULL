@@ -57,8 +57,11 @@ namespace CodeBase.Infrastructure.States
             RaycastHit? hit = _raycastService.GetMouseRaycastHit();
             if (hit != null)
             {
-                mouseGridIndicator.UpdatePosition(hit.Value.point);
-                mouseGridInteractor.Update(hit.Value.point);
+                var point = hit.Value.point;
+                point += hit.Value.normal * 0.1f;
+
+                mouseGridIndicator.UpdatePosition(point);
+                mouseGridInteractor.Update(point);
             }
         }
     }
